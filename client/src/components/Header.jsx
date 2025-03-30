@@ -20,7 +20,7 @@ const Header = () => {
         />
       </h1>
       <h2 className="text-3xl sm:text-5xl font-semibold mb-4 ">
-        Welcome to out app
+        Welcome to our app
       </h2>
       <p className="mb-8 max-w-md">
         Let's start with a quick product tour and we will have you up and
