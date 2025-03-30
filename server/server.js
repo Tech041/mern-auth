@@ -7,13 +7,15 @@ import authRouter from "./routes/authRoute.js";
 import userRouter from "./routes/userRoute.js";
 const app = express();
 connectDB();
+// Frontend Url
+const allowedOrigins = ["http://localhost:5173"];
 
 const port = process.env.PORT || 8000;
 
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true }));
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 // API ENDPOINTS
 app.use("/api/auth", authRouter);

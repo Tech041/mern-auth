@@ -2,6 +2,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
 import transpoter from "../config/nodemailer.js";
+import {
+  EMAIL_VERIFY_TEMPLATE,
+  PASSWORD_RESET_TEMPLATE,
+} from "../config/emailTemplate.js";
 
 // Register User
 export const register = async (req, res) => {
@@ -37,7 +41,7 @@ export const register = async (req, res) => {
       from: process.env.SENDER_EMAIL,
       to: email,
       subject: "Welcome message from Nelson",
-      text: `Welcome to Nelson website.Your account has been created with the email id:${email}`,
+      text: `Dear ${name} your are welcome to Nelson MERN AUTH website.Your account has been created with the email id:${email}`,
     };
     await transpoter.sendMail(mailOptions);
     return res.json({ success: true, message: "Registration successful" });
@@ -121,7 +125,11 @@ export const sendVerifyOtp = async (req, res) => {
       from: process.env.SENDER_EMAIL,
       to: user.email,
       subject: "ACCOUNT VERIFICATION OTP",
-      text: `Your OTP is ${otp}. Verify your account now. This OTP expires in 5 minutes`,
+      // text: `Your OTP is ${otp}. Verify your account now. This OTP expires in 5 minutes`,
+      html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace(
+        "{{email}}",
+        user.email
+      ),
     };
     await transpoter.sendMail(mailOptions);
     return res.json({
@@ -192,8 +200,8 @@ export const sendResetOtp = async (req, res) => {
 
     user.resetOtp = otp;
 
-    // set expiry to 5mins
-    user.resetOtpExpiredAt = Date.now() + 10 * 60 * 1000;
+    // set expiry to 10mins
+    user.resetOtpExpiredAt = Date.now() + 10 * 60 * 1000;4
     await user.save();
 
     // SENDING OTP TO USER
@@ -201,7 +209,11 @@ export const sendResetOtp = async (req, res) => {
       from: process.env.SENDER_EMAIL,
       to: user.email,
       subject: "PASSWORD RESET OTP",
-      text: `Your OTP is ${otp}. Reset your password now. This OTP expires in 10 minutes`,
+      // text: `Your OTP is ${otp}. Reset your password now. This OTP expires in 10 minutes`,
+      html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace(
+        "{{email}}",
+        user.email
+      ),
     };
     await transpoter.sendMail(mailOptions);
     return res.json({
@@ -240,7 +252,7 @@ export const resetPassword = async (req, res) => {
     user.resetOtp = "";
     user.resetOtpExpiredAt = 0;
     await user.save();
-    return res.json({success:true,message:"Password reset successfully"})
+    return res.json({ success: true, message: "Password reset successfully" });
   } catch (error) {
     return res.json({ success: false, message: error.message });
   }
