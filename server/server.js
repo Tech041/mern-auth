@@ -8,7 +8,7 @@ import userRouter from "./routes/userRoute.js";
 const app = express();
 connectDB();
 // Frontend Url
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = ["https://mern-auth-client-eight.vercel.app/"];
 
 const port = process.env.PORT || 8000;
 
