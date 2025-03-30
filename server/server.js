@@ -8,14 +8,23 @@ import userRouter from "./routes/userRoute.js";
 const app = express();
 connectDB();
 // Frontend Url
-const allowedOrigins = ["https://mern-auth-client-eight.vercel.app/"];
+const allowedOrigins = ["https://mernauth-frontend.vercel.app"];
 
 const port = process.env.PORT || 8000;
 
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+// app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 
 // API ENDPOINTS
 app.use("/api/auth", authRouter);
