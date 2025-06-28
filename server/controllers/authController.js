@@ -93,8 +93,10 @@ export const login = async (req, res) => {
 // Logout User
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("token", "", {
-      maxAge: 0,
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
     });
     return res.json({
       success: true,
@@ -254,7 +256,7 @@ export const resetPassword = async (req, res) => {
     user.resetOtp = "";
     user.resetOtpExpiredAt = 0;
     await user.save();
-    return res.json({ success: true, message: "Password reset successfully" });
+    return res.json({ success: true, message: "Password reset successful" });
   } catch (error) {
     return res.json({ success: false, message: error.message });
   }

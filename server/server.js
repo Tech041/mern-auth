@@ -10,7 +10,7 @@ connectDB();
 // Frontend Url
 const allowedOrigins = [
   "https://mernauth-frontend.vercel.app",
-  "http://localhost:5173",
+  "http://localhost:3000",
 ];
 
 const port = process.env.PORT || 8000;

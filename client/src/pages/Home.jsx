@@ -1,13 +1,19 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Header from "../components/Header";
+import Hero from "../components/Hero";
+import LatestJobPost from "../components/LatestJobPost";
+import WhyChooseUs from "../components/WhyChooseUs";
+import OurBlogs from "../components/OurBlogs";
+import Testimonials from "../components/Testimonials";
 
 const Home = () => {
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen bg-[url('/bg_img.png')] bg-cover bg-center">
-      <Navbar />
-      <Header />
-    </section>
+    <main className="pt-20">
+      <Hero />
+      <LatestJobPost />
+      <WhyChooseUs />
+      <OurBlogs />
+      <Testimonials />
+    </main>
   );
 };
 
