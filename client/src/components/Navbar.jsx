@@ -43,18 +43,16 @@ const Navbar = () => {
     }
   };
   return (
-    <header className="w-full h-[100px]  flex items-center fixed bg-gray-50 z-40">
+    <header className="w-full h-[80px]  flex items-center fixed bg-gray-50 z-40">
       <div className="container">
         <div className="flex justify-between items-center">
           {/* logo */}
-          <div>
+          <div className="">
             <img
               onClick={() => navigate("/")}
               src="/medhunt_logo.webp"
-              width={100}
-              height={100}
               alt="logo"
-              className="cursor-pointer"
+              className="cursor-pointer w-[100px] h-[70px]"
             />
           </div>{" "}
           <div className="md:flex justify-center items-center hidden ">
