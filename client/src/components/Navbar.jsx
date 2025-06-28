@@ -45,7 +45,7 @@ const Navbar = () => {
   return (
     <header className="w-full h-[100px]  flex items-center fixed bg-gray-50 z-40">
       <div className="container">
-        <div className="w-full  flex justify-between items-center">
+        <div className="flex justify-between items-center">
           {/* logo */}
           <div>
             <img
