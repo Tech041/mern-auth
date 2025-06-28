@@ -88,7 +88,7 @@ const Navbar = () => {
             </nav>
           </div>
           {userData ? (
-            <div className=" w-28 h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
+            <div className="h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
               <span className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md">
                 {/* {userData.name} */}
                 My profile
@@ -105,7 +105,7 @@ const Navbar = () => {
                   )}
                   <li
                     onClick={logout}
-                    className="py-1 px-2 hover:bg-gray-200 text-red-600 cursor-pointer pr-10"
+                    className="py-1 px-2 hover:bg-gray-200 text-red-600 cursor-pointer"
                   >
                     Logout
                   </li>
@@ -115,7 +115,7 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => navigate("/register")}
-              className="flex items-center gap-2 border border-blue-500  px-6 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
+              className="flex items-center gap-2 border border-blue-500  px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
             >
               Login{" "}
               <img src={assets.arrow_icon} alt="" className="arrow_icon" />
