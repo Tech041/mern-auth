@@ -48,14 +48,12 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* logo */}
           <div className="">
-            <img
+            <span
               onClick={() => navigate("/")}
-              src="/medhunt_logo.webp"
-              width={100}
-              height={70}
-              alt="logo"
-              className="cursor-pointer"
-            />
+              className="cursor-pointer text-blue-600 font-semibold"
+            >
+              MedHunt
+            </span>
           </div>{" "}
           <div className="hidden md:flex justify-center items-center ">
             <nav className="">
