@@ -43,7 +43,7 @@ const Navbar = () => {
     }
   };
   return (
-    <header className="w-full h-[80px]  flex items-center fixed bg-gray-50 z-40">
+    <header className=" fixed w-full h-[80px]  flex items-center  bg-gray-50 z-40">
       <div className="container">
         <div className="flex justify-between items-center">
           {/* logo */}
@@ -51,11 +51,13 @@ const Navbar = () => {
             <img
               onClick={() => navigate("/")}
               src="/medhunt_logo.webp"
+              width={100}
+              height={70}
               alt="logo"
-              className="cursor-pointer w-[100px] h-[70px]"
+              className="cursor-pointer"
             />
           </div>{" "}
-          <div className="md:flex justify-center items-center hidden ">
+          <div className="hidden md:flex justify-center items-center ">
             <nav className="">
               <ul className="flex justify-between items-center gap-3">
                 <NavLink to={"/"} className={listStyle}>
@@ -111,7 +113,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <div className="flex items-center">
+            <div className="flex items-center ">
               <button
                 onClick={() => navigate("/register")}
                 className="flex items-center gap-2 border border-blue-500  px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"

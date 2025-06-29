@@ -7,7 +7,7 @@ import Testimonials from "../components/Testimonials";
 
 const Home = () => {
   return (
-    <main className="pt-20 w-full h-full flex flex-col items-center">
+    <main className="pt-20 w-full h-full">
       <Hero />
       <LatestJobPost />
       <WhyChooseUs />

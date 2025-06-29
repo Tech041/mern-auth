@@ -16,7 +16,7 @@ const Notifications = React.lazy(() => import("./pages/Notifications"));
 
 const App = () => {
   return (
-    <main className="">
+    <main className="w-full h-full">
       <ToastContainer />
       <Navbar />
       <Routes>
