@@ -85,7 +85,8 @@ const Navbar = () => {
               </ul>
             </nav>
           </div>
-          <div className="">
+          <div className="md:hidden">Menu</div>
+          <div className="hidden md:block">
             {userData ? (
               <div className="h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
                 <span className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md">
