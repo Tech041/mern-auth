@@ -111,13 +111,15 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <button
-              onClick={() => navigate("/register")}
-              className="flex items-center gap-2 border border-blue-500  px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
-            >
-              Login{" "}
-              <img src={assets.arrow_icon} alt="" className="arrow_icon" />
-            </button>
+            <div className="flex items-center">
+              <button
+                onClick={() => navigate("/register")}
+                className="flex items-center gap-2 border border-blue-500  px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
+              >
+                Login{" "}
+                <img src={assets.arrow_icon} alt="arrow_icon" className="w-2" />
+              </button>
+            </div>
           )}
         </div>
       </div>
