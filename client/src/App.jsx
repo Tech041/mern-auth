@@ -16,7 +16,7 @@ const Notifications = React.lazy(() => import("./pages/Notifications"));
 
 const App = () => {
   return (
-    <main className="w-full h-full">
+    <div className="w-full h-full">
       <ToastContainer />
       <Navbar />
       <Routes>
@@ -30,7 +30,7 @@ const App = () => {
         <Route path="/email-verification" element={<EmailVerification />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
-    </main>
+    </div>
   );
 };
 
