@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Heading from "./Heading";
 const WhyChooseUs = () => {
   return (
-    <section className="mt-5 py-4">
+    <section className="mt-5 py-4 w-full h-full">
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}

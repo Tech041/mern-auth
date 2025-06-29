@@ -85,42 +85,48 @@ const Navbar = () => {
               </ul>
             </nav>
           </div>
-          {userData ? (
-            <div className="h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
-              <span className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md">
-                {/* {userData.name} */}
-                My profile
-              </span>{" "}
-              <div className="absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-10">
-                <ul className="list-none m-0 p-2 bg-gray-100 text-sm">
-                  {!userData.isAccountVerified && (
+          <div className="">
+            {userData ? (
+              <div className="h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
+                <span className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md">
+                  {/* {userData.name} */}
+                  My profile
+                </span>{" "}
+                <div className="absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-10">
+                  <ul className="list-none m-0 p-2 bg-gray-100 text-sm">
+                    {!userData.isAccountVerified && (
+                      <li
+                        onClick={sendVerificationOtp}
+                        className="py-1 px-2 hover:bg-gray-200 cursor-pointer"
+                      >
+                        Verify Email
+                      </li>
+                    )}
                     <li
-                      onClick={sendVerificationOtp}
-                      className="py-1 px-2 hover:bg-gray-200 cursor-pointer"
+                      onClick={logout}
+                      className="py-1 px-2 hover:bg-gray-200 text-red-600 cursor-pointer"
                     >
-                      Verify Email
+                      Logout
                     </li>
-                  )}
-                  <li
-                    onClick={logout}
-                    className="py-1 px-2 hover:bg-gray-200 text-red-600 cursor-pointer"
-                  >
-                    Logout
-                  </li>
-                </ul>
+                  </ul>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="flex items-center ">
-              <button
-                onClick={() => navigate("/register")}
-                className="flex items-center gap-2 border border-blue-500  px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
-              >
-                Login{" "}
-                <img src={assets.arrow_icon} alt="arrow_icon" className="w-2" />
-              </button>
-            </div>
-          )}
+            ) : (
+              <div className="flex items-center ">
+                <button
+                  onClick={() => navigate("/register")}
+                  className="flex items-center gap-2 border border-blue-500  px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
+                >
+                  Login{" "}
+                  <img
+                    src={assets.arrow_icon}
+                    alt="arrow_icon"
+                    className="w-2"
+                  />
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
