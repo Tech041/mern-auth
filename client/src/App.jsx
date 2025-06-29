@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import React from "react";
 
 // Dynamic imports.
@@ -18,7 +18,7 @@ const App = () => {
   return (
     <div className="w-full h-full">
       <ToastContainer />
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
