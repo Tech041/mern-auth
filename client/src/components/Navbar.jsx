@@ -43,94 +43,88 @@ const Navbar = () => {
     }
   };
   return (
-    <header className=" fixed w-full h-[80px]  flex items-center  bg-gray-50 z-40">
-      <div className="container">
-        <div className="flex justify-between items-center">
-          {/* logo */}
-          <div className="">
-            <span
-              onClick={() => navigate("/")}
-              className="cursor-pointer text-blue-600 font-semibold"
-            >
-              MedHunt
-            </span>
-          </div>{" "}
-          <div className="hidden md:flex justify-center items-center ">
-            <nav className="">
-              <ul className="flex justify-between items-center gap-3">
-                <NavLink to={"/"} className={listStyle}>
-                  <span className="flex items-center justify-center">
-                    <FiHome size={20} />
-                  </span>
-                  <span className="text-sm">Home</span>
-                </NavLink>
-                <NavLink to={"/jobs"} className={listStyle}>
-                  <span className="flex items-center justify-center">
-                    <BsFillBoxSeamFill size={20} />
-                  </span>
-                  <span className="text-sm">Jobs</span>
-                </NavLink>
-                <NavLink to={"/post-jobs"} className={listStyle}>
-                  <span className="flex items-center justify-center">
-                    <AiFillMedicineBox size={20} />
-                  </span>
-                  <span className="text-sm">Post a job</span>
-                </NavLink>
-                <NavLink to={"/notifications"} className={listStyle}>
-                  <span className="flex items-center justify-center">
-                    <IoMdNotificationsOutline size={25} />
-                  </span>
-                  <span className="text-sm">Notifications</span>
-                </NavLink>
-              </ul>
-            </nav>
-          </div>
-          <div className="md:hidden">Menu</div>
-          <div className="hidden md:block">
-            {userData ? (
-              <div className="h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
-                <span className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md">
-                  {/* {userData.name} */}
-                  My profile
-                </span>{" "}
-                <div className="absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-10">
-                  <ul className="list-none m-0 p-2 bg-gray-100 text-sm">
-                    {!userData.isAccountVerified && (
-                      <li
-                        onClick={sendVerificationOtp}
-                        className="py-1 px-2 hover:bg-gray-200 cursor-pointer"
-                      >
-                        Verify Email
-                      </li>
-                    )}
-                    <li
-                      onClick={logout}
-                      className="py-1 px-2 hover:bg-gray-200 text-red-600 cursor-pointer"
-                    >
-                      Logout
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center ">
-                <button
-                  onClick={() => navigate("/register")}
-                  className="flex items-center gap-2 border border-blue-500  px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
-                >
-                  Login{" "}
-                  <img
-                    src={assets.arrow_icon}
-                    alt="arrow_icon"
-                    className="w-2"
-                  />
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
+   <header className="fixed top-0 left-0 w-full h-[80px] flex items-center bg-gray-50 z-20 shadow-sm overflow-y-hidden overflow-x-hidden">
+  <div className="container">
+    <div className="flex justify-between items-center w-full">
+      {/* Logo */}
+      <div className="flex-shrink-0">
+        <span
+          onClick={() => navigate("/")}
+          className="cursor-pointer text-blue-600 font-semibold text-lg md:text-xl"
+        >
+          MedHunt
+        </span>
       </div>
-    </header>
+
+      {/* Nav Links (Desktop Only) */}
+      <nav className="hidden md:flex items-center">
+        <ul className="flex gap-4 items-center">
+          <NavLink to="/" className={listStyle}>
+            <span className="flex justify-center">
+              <FiHome size={20} />
+            </span>
+            <span className="text-sm">Home</span>
+          </NavLink>
+          <NavLink to="/jobs" className={listStyle}>
+            <span className="flex justify-center">
+              <BsFillBoxSeamFill size={20} />
+            </span>
+            <span className="text-sm">Jobs</span>
+          </NavLink>
+          <NavLink to="/post-jobs" className={listStyle}>
+            <span className="flex justify-center">
+              <AiFillMedicineBox size={20} />
+            </span>
+            <span className="text-sm">Post a job</span>
+          </NavLink>
+          <NavLink to="/notifications" className={listStyle}>
+            <span className="flex justify-center">
+              <IoMdNotificationsOutline size={25} />
+            </span>
+            <span className="text-sm">Notifications</span>
+          </NavLink>
+        </ul>
+      </nav>
+
+      {/* Auth Section */}
+      <div className="flex items-center">
+        {userData ? (
+          <div className="relative group">
+            <span className="text-base px-3 py-1 border-2 border-blue-500 text-blue-700 rounded-md cursor-pointer whitespace-nowrap">
+              My profile
+            </span>
+            <div className="absolute hidden group-hover:block top-3 right-3 mt-2 z-30 text-sm  ">
+              <ul className="list-none p-2">
+                {!userData.isAccountVerified && (
+                  <li
+                    onClick={sendVerificationOtp}
+                    className="py-1 px-2 hover:bg-gray-200 cursor-pointer"
+                  >
+                    Verify Email
+                  </li>
+                )}
+                <li
+                  onClick={logout}
+                  className="py-1 px-2 hover:bg-gray-200 text-red-600 cursor-pointer"
+                >
+                  Logout
+                </li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => navigate("/register")}
+            className="flex items-center gap-2 border border-blue-500 px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 rounded-md whitespace-nowrap"
+          >
+            Login
+            <img src={assets.arrow_icon} alt="arrow" className="w-2" />
+          </button>
+        )}
+      </div>
+    </div>
+  </div>
+</header>
   );
 };
 
