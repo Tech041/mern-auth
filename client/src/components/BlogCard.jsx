@@ -1,13 +1,13 @@
 import React from "react";
 import { IoArrowForwardSharp } from "react-icons/io5";
 
-const BlogCard = ({ title, text }) => {
+const BlogCard = ({ title, text,src }) => {
   return (
     <div className="w-full h-[500px] border bg-gradient-to-br from-blue-50 to-white overflow-hidden rounded-md mb-4">
       <div className="w-full h-full flex flex-col justify-center gap-2 ">
         <div className="h-[50%] bg-red-400">
           <img
-            src="/medical_team.webp"
+            src={src}
             alt="team"
             className=" w-full h-full object-cover"
           />

@@ -40,6 +40,7 @@ const OurBlogs = () => {
               viewport={{ once: false }}
             >
               <BlogCard
+                src={"/health_team3.webp"}
                 title={"Navigating healthcare hiriing challenges"}
                 text={
                   " Addressing healthcare hiring challenges requires agility,strategic outreach, and innovation. From talent shortages to evolving care demands, success lies in adapting recruitment methods, leveraging tech-driven solutions."
@@ -55,6 +56,7 @@ const OurBlogs = () => {
               viewport={{ once: false }}
             >
               <BlogCard
+                src={"/health_team2.webp"}
                 title={"the rise of global opportunities"}
                 text={
                   "As borders blur in the digital age, global opportunities are on the rise—enabling professionals and organizations to collaborate, innovate, and scale across continents. From remote work to cross-border partnerships, the world is becoming one interconnected marketplace of potential."

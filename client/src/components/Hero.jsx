@@ -47,7 +47,7 @@ const Hero = () => {
           </div>
           <div className="flex-1 h-full w-full">
             <img
-              src="/hero_img.webp"
+              src="/health_team3.webp"
               alt="hero_image"
               className="w-full h-full"
             />
