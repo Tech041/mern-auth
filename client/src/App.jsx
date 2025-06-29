@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navbar from "./components/Navbar";
 import React from "react";
+import Footer from "./components/Footer";
 
 // Dynamic imports.
 const Home = React.lazy(() => import("./pages/Home"));
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/email-verification" element={<EmailVerification />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
+      <Footer />
     </div>
   );
 };

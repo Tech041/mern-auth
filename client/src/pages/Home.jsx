@@ -4,6 +4,7 @@ import LatestJobPost from "../components/LatestJobPost";
 import WhyChooseUs from "../components/WhyChooseUs";
 import OurBlogs from "../components/OurBlogs";
 import Testimonials from "../components/Testimonials";
+import NewsLetter from "../components/NewsLetter";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <WhyChooseUs />
       <OurBlogs />
       <Testimonials />
+      <NewsLetter />
     </main>
   );
 };
