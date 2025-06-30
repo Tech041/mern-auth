@@ -69,8 +69,7 @@ const CreateProfile = () => {
             Create a Profile with us
           </h1>
           <p className="capitalize text-center py-3 text-sm ">
-            By creating a profile, we can know if you are an applicant or
-            employer
+            By creating a profile, you can now post or apply for jobs.
           </p>
           <form
             onSubmit={handleSubmit(onSubmit)}

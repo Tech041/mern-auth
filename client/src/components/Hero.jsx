@@ -2,6 +2,7 @@ import React from "react";
 import TrustedBy from "./TrustedBy";
 import CategoryCard from "./CategoryCard";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -37,9 +38,11 @@ const Hero = () => {
             </motion.div>
 
             <div className="text-center lg:text-start">
-              <button className=" bg-blue-600 text-white border px-4 py-1 hover:bg-blue-500 rounded-md">
-                Get started
-              </button>
+              <Link to={"/jobs"}>
+                <button className=" bg-blue-600 text-white border px-4 py-1 hover:bg-blue-500 rounded-md">
+                  Get started
+                </button>
+              </Link>
             </div>
             <div className="text-center lg:text-start">
               <TrustedBy />

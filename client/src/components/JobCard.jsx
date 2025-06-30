@@ -2,10 +2,15 @@ import React from "react";
 import { PiMoneyWavyBold } from "react-icons/pi";
 import { IoLocationSharp } from "react-icons/io5";
 import { FaRegClock } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
-const JobCard = ({ title, location,salary, posted, qualifications }) => {
+const JobCard = ({ title, location, salary, posted, qualifications }) => {
   return (
-    <div className="flex items-center gap-3 border bg-gray-50 rounded-lg px-4 py-3 shadow-lg">
+    <Link
+      to={"/job-details/87878"}
+      onClick={() => scrollTo(0, 0)}
+      className="flex items-center gap-3 border bg-gray-50 rounded-lg px-4 py-3 shadow-lg"
+    >
       <div className="w-[20%]">
         <img
           src="/hiring_img.webp"
@@ -21,7 +26,7 @@ const JobCard = ({ title, location,salary, posted, qualifications }) => {
             <span className="text-xs">{location}</span>
           </div>
           <div className="flex items-center justify-center gap-2 py-1">
-            <PiMoneyWavyBold  size={10} />{" "}
+            <PiMoneyWavyBold size={10} />{" "}
             <span className="text-xs"> ₦{salary}</span>
           </div>
           <div className="flex items-center justify-center gap-2">
@@ -30,7 +35,7 @@ const JobCard = ({ title, location,salary, posted, qualifications }) => {
         </div>
         <p className="text-xs text-gray-600 pt-2">{qualifications}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

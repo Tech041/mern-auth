@@ -7,7 +7,7 @@ const MyProfile = () => {
       <div className="container">
         <div className="pt-10">
           <h2 className="text-2xl font-semibold mb-6 text-center text-blue-700">
-            User Profile
+            My Profile
           </h2>
           <div className="space-y-4">
             <ProfileItem label="Full Name" value={user.name} />

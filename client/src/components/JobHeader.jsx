@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const JobHeader = () => {
   return (
@@ -15,7 +16,13 @@ const JobHeader = () => {
               className="placeholder:text-base placeholder:capitalize px-6 py-3 border border-gray-500 w-full rounded-md"
             />
           </div>
-          <p className="py-3">Upload or create a resume to easily apply to jobs.</p>
+          <Link
+            to={"/create-profile"}
+            onClick={() => scrollTo(0, 0)}
+            className="py-3 underline text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            Create profile to apply for jobs.
+          </Link>
         </div>
       </div>
     </section>
