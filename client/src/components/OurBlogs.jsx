@@ -2,6 +2,7 @@ import React from "react";
 import BlogCard from "./BlogCard";
 import Heading from "./Heading";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const OurBlogs = () => {
   return (
@@ -27,9 +28,11 @@ const OurBlogs = () => {
               delivery and workforce optimization
             </p>
             <div className="mt-3 py-3">
-              <button className=" text-base text-white capitalize bg-black hover:bg-black/70 px-4 py-1 rounded-md">
-                View all
-              </button>
+              <Link onClick={() => scrollTo(0, 0)} to={"/our-blog"}>
+                <button className=" text-base text-white capitalize bg-black hover:bg-black/70 px-4 py-1 rounded-md">
+                  View all
+                </button>
+              </Link>
             </div>
           </motion.div>
           <div className="flex-1  w-full h-full">

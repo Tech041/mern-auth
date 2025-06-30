@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { assets } from "../assets/assets";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { FiHome } from "react-icons/fi";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import { AiFillMedicineBox } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import apiRequest from "../utils/apiRequest";
 
 const listStyle =
   "cursor-pointer px-2 flex flex-col justify-center item-center text-primary ";
@@ -17,8 +17,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const sendVerificationOtp = async () => {
     try {
-      axios.defaults.withCredentials = true;
-      const { data } = await axios.post(
+      const { data } = await apiRequest.post(
         backendUrl + "/api/auth/send-verify-otp"
       );
       if (data.success) {
@@ -33,8 +32,7 @@ const Navbar = () => {
   };
   const logout = async () => {
     try {
-      axios.defaults.withCredentials = true;
-      const { data } = await axios.post(backendUrl + "/api/auth/logout");
+      const { data } = await apiRequest.post(backendUrl + "/api/auth/logout");
       data.success && setIsLoggedIn(false);
       data.success && setUserData(false);
       navigate("/");
@@ -109,7 +107,7 @@ const Navbar = () => {
                     {!userData.isAccountVerified && (
                       <li
                         onClick={sendVerificationOtp}
-                        className="py-1 px-2 hover:bg-gray-200 cursor-pointer"
+                        className="py-1 px-2 hover:bg-gray-200 text-green-500 cursor-pointer"
                       >
                         Verify Email
                       </li>

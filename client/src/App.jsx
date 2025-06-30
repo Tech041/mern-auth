@@ -15,6 +15,8 @@ const PostJobs = React.lazy(() => import("./pages/PostJobs"));
 const Jobs = React.lazy(() => import("./pages/Jobs"));
 const MyProfile = React.lazy(() => import("./pages/MyProfile"));
 const SingleJob = React.lazy(() => import("./pages/SingleJob"));
+const WhyUs = React.lazy(() => import("./pages/WhyUs"));
+const OurBlog = React.lazy(() => import("./pages/OurBlog"));
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/post-jobs" element={<PostJobs />} />
         <Route path="/job-details/:id" element={<SingleJob />} />
+        <Route path="/why-us" element={<WhyUs />} />
+        <Route path="/our-blog" element={<OurBlog />} />
         <Route path="/create-profile" element={<CreateProfile />} />
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/login" element={<Login />} />

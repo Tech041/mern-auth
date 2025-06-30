@@ -3,6 +3,7 @@ import { IoArrowForwardSharp } from "react-icons/io5";
 import { motion } from "framer-motion";
 
 import Heading from "./Heading";
+import { Link } from "react-router-dom";
 const WhyChooseUs = () => {
   return (
     <section className="mt-5 py-4 w-full h-full">
@@ -35,9 +36,12 @@ const WhyChooseUs = () => {
                 support, and a commitment to life-changing service.
               </p>
               <div className="mt-4">
-                <button className=" flex justify-center gap-2 text-white bg-black hover:bg-black/75 px-4 py-2 text-sm rounded-md ">
-                  Discover More <IoArrowForwardSharp size={20} color="white" />
-                </button>
+                <Link onClick={() => scrollTo(0, 0)} to={"/why-us"}>
+                  <button className=" flex justify-center gap-2 text-white bg-black hover:bg-black/75 px-4 py-2 text-sm rounded-md ">
+                    Discover More{" "}
+                    <IoArrowForwardSharp size={20} color="white" />
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

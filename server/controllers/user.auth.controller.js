@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import userModel from "../models/userModel.js";
+import User from "../models/user.auth.model.js";
 import transpoter from "../config/nodemailer.js";
 import {
   EMAIL_VERIFY_TEMPLATE,
@@ -14,12 +14,12 @@ export const register = async (req, res) => {
     return res.json({ success: false, message: "Missing Details" });
   }
   try {
-    const existingUser = await userModel.findOne({ email });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.json({ success: false, message: "User already exists" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new userModel({
+    const user = new User({
       name,
       email,
       password: hashedPassword,
@@ -36,14 +36,6 @@ export const register = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    // Sending welcome email
-    const mailOptions = {
-      from: process.env.SENDER_EMAIL,
-      to: email,
-      subject: "Welcome message from Nelson",
-      text: `Dear ${name} your are welcome to Nelson MERN AUTH website.Your account has been created with the email id:${email}`,
-    };
-    await transpoter.sendMail(mailOptions);
     return res.json({ success: true, message: "Registration successful" });
   } catch (error) {
     return res.json({ success: false, message: error.message });
@@ -60,8 +52,7 @@ export const login = async (req, res) => {
     });
   }
   try {
-    console.log(req.body);
-    const user = await userModel.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.json({ success: false, message: "User does not exist" });
     }
@@ -111,7 +102,7 @@ export const logout = async (req, res) => {
 export const sendVerifyOtp = async (req, res) => {
   try {
     const { userId } = req.body;
-    const user = await userModel.findById(userId);
+    const user = await User.findById(userId);
     if (user.isAccountVerified) {
       return res.json({ success: false, message: "Account already verified" });
     }
@@ -154,7 +145,7 @@ export const verifyEmail = async (req, res) => {
   }
 
   try {
-    const user = await userModel.findById(userId);
+    const user = await User.findById(userId);
     if (!user) {
       return res.json({ success: false, message: "User not found" });
     }
@@ -169,6 +160,16 @@ export const verifyEmail = async (req, res) => {
     user.isAccountVerified = true;
     (user.verifyOtp = ""), (user.verifyOtpExpiredAt = 0);
     await user.save();
+
+    // Sending welcome email
+    const mailOptions = {
+      from: process.env.SENDER_EMAIL,
+      to: user.email,
+      subject: "MedHunt Healthcare Job Portal.",
+      text: `Dear ${user.name} your  account with ${user.email} has  been verified. When creating a profile, use this same email address. We promise to serve you better.`,
+    };
+    await transpoter.sendMail(mailOptions);
+
     return res.json({ success: true, message: "Email verified successfully" });
   } catch (error) {
     return res.json({ success: false, message: error.message });
@@ -193,7 +194,7 @@ export const sendResetOtp = async (req, res) => {
     return res.json({ success: false, message: "Email is required" });
   }
   try {
-    const user = await userModel.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.json({ success: false, message: "User not found" });
     }
@@ -240,7 +241,7 @@ export const resetPassword = async (req, res) => {
   }
 
   try {
-    const user = await userModel.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.json({ success: false, message: "User not found" });
     }

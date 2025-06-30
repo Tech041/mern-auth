@@ -8,8 +8,8 @@ import {
   sendResetOtp,
   sendVerifyOtp,
   verifyEmail,
-} from "../controllers/authController.js";
-import userAuth from "../middlewares/userAuth.js";
+} from "../controllers/user.auth.controller.js";
+import userAuth from "../middlewares/user.auth.js";
 const authRouter = express.Router();
 authRouter.post("/register", register);
 authRouter.post("/login", login);

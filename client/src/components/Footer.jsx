@@ -23,7 +23,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="">
-            <p className=" capitalize text-xl font-medium mb-5 pt-5 text-gray-300 ">
+            <p className=" capitalize text-xl font-medium  pt-5 text-gray-300 ">
               company
             </p>
             <ul className="flex flex-col gap-1 text-gray-400">
@@ -37,59 +37,26 @@ const Footer = () => {
                   About
                 </Link>
               </li>
-              <li className="cursor-pointer py-1">
-                <Link
-                  onClick={() => scrollTo(0, 0)}
-                  to={"/contact"}
-                  className=""
-                >
-                  Contact Us
-                </Link>
-              </li>
-              <li className="cursor-pointer">
-                <Link
-                  onClick={() => scrollTo(0, 0)}
-                  to={"/products"}
-                  className=""
-                >
-                  Careers
-                </Link>
-              </li>
-              <li className="cursor-pointer">
-                <Link
-                  onClick={() => scrollTo(0, 0)}
-                  to={"/products"}
-                  className=""
-                >
-                  Privacy Policy
-                </Link>
-              </li>{" "}
-              <li className="cursor-pointer">
-                <Link
-                  onClick={() => scrollTo(0, 0)}
-                  to={"/products"}
-                  className=""
-                >
-                  Terms Of Services
-                </Link>
-              </li>
+              
+              
+             
             </ul>
           </div>
           <div className="">
-            <p className=" capitalize text-xl font-medium mb-5 text-gray-300 ">
+            <p className=" capitalize text-xl font-medium pt-5  text-gray-300 ">
               For professionals
             </p>
             <div className="">
               <div className="flex  items-center ">
                 <ul className="flex flex-col gap-1 text-gray-400">
                   <li className="cursor-pointer py-1">
-                    <Link onClick={() => scrollTo(0, 0)} to={"/"} className="">
+                    <Link  onClick={() => scrollTo(0, 0)} to={"/jobs"} className="">
                       Browse Jobs
                     </Link>
                   </li>
                   <li className="cursor-pointer">
                     <Link
-                      to={"/about"}
+                      to={"/create-profile"}
                       onClick={() => scrollTo(0, 0)}
                       className=""
                     >
@@ -99,98 +66,42 @@ const Footer = () => {
                   <li className="cursor-pointer py-1">
                     <Link
                       onClick={() => scrollTo(0, 0)}
-                      to={"/contact"}
+                      to={"/my-profile"}
                       className=""
                     >
                       My Profile
                     </Link>
                   </li>
-                  <li className="cursor-pointer">
-                    <Link
-                      onClick={() => scrollTo(0, 0)}
-                      to={"/products"}
-                      className=""
-                    >
-                      Careers
-                    </Link>
-                  </li>
-                  <li className="cursor-pointer">
-                    <Link
-                      onClick={() => scrollTo(0, 0)}
-                      to={"/products"}
-                      className=""
-                    >
-                      Privacy Policy
-                    </Link>
-                  </li>{" "}
-                  <li className="cursor-pointer">
-                    <Link
-                      onClick={() => scrollTo(0, 0)}
-                      to={"/products"}
-                      className=""
-                    >
-                      Terms Of Services
-                    </Link>
-                  </li>
+                  
+                  
                 </ul>
               </div>
             </div>
           </div>
           <div className="">
-            <p className=" capitalize text-xl font-medium mb-5 text-gray-300 ">
+            <p className=" capitalize text-xl font-medium  text-gray-300 ">
               For organizations
             </p>
             <div className="">
               <div className="flex  items-center ">
                 <ul className="flex flex-col gap-1 text-gray-400">
                   <li className="cursor-pointer py-1">
-                    <Link onClick={() => scrollTo(0, 0)} to={"/"} className="">
-                      Employer's Login
-                    </Link>
-                  </li>
-                  <li className="cursor-pointer">
-                    <Link
-                      to={"/about"}
-                      onClick={() => scrollTo(0, 0)}
-                      className=""
-                    >
-                      Employer's Dashboard
-                    </Link>
-                  </li>
-                  <li className="cursor-pointer py-1">
                     <Link
                       onClick={() => scrollTo(0, 0)}
-                      to={"/contact"}
+                      to={"/post-jobs"}
                       className=""
                     >
                       Post Job
                     </Link>
                   </li>
+
                   <li className="cursor-pointer">
                     <Link
                       onClick={() => scrollTo(0, 0)}
-                      to={"/products"}
+                      to={"/my-profile"}
                       className=""
                     >
-                      Careers
-                    </Link>
-                  </li>
-                  <li className="cursor-pointer">
-                    <Link
-                      onClick={() => scrollTo(0, 0)}
-                      to={"/products"}
-                      className=""
-                    >
-                      Privacy Policy
-                    </Link>
-                  </li>{" "}
-                  <li className="cursor-pointer">
-                    <Link
-                      onClick={() => scrollTo(0, 0)}
-                      to={"/products"}
-                      className=""
-                    >
-                      Terms Of Services
+                      Employer's Profile
                     </Link>
                   </li>
                 </ul>

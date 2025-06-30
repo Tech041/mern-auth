@@ -3,8 +3,9 @@ import cors from "cors";
 import "dotenv/config";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/mongodb.js";
-import authRouter from "./routes/authRoute.js";
-import userRouter from "./routes/userRoute.js";
+import authRouter from "./routes/user.auth.route.js";
+import userRouter from "./routes/user.route.js";
+import helmet from "helmet";
 const app = express();
 connectDB();
 // Frontend Url
@@ -27,6 +28,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+app.use(helmet());
 
 // API ENDPOINTS
 app.use("/api/auth", authRouter);

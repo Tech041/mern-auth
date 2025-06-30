@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const CreateProfileschema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -20,6 +22,8 @@ const CreateProfileschema = z.object({
 });
 
 const CreateProfile = () => {
+  const navigate = useNavigate();
+  const { userData, } = useContext(AppContext);
   const {
     register,
     reset,
@@ -61,6 +65,9 @@ const CreateProfile = () => {
     reset();
   };
 
+  useEffect(() => {
+    !userData && navigate("/login");
+  }, [userData]);
   return (
     <section className="w-full min-h-screen pt-20 mb-5">
       <div className="container">
