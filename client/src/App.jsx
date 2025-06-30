@@ -13,7 +13,7 @@ const ResetPassword = React.lazy(() => import("./pages/ResetPassword"));
 const Register = React.lazy(() => import("./pages/Register"));
 const PostJobs = React.lazy(() => import("./pages/PostJobs"));
 const Jobs = React.lazy(() => import("./pages/Jobs"));
-const Notifications = React.lazy(() => import("./pages/Notifications"));
+const MyProfile = React.lazy(() => import("./pages/MyProfile"));
 
 const App = () => {
   return (
@@ -24,8 +24,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/post-jobs" element={<PostJobs />} />
-        <Route path="/creeate-profile" element={<CreateProfile />} />
-        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/create-profile" element={<CreateProfile />} />
+        <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/email-verification" element={<EmailVerification />} />

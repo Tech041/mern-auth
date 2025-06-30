@@ -31,7 +31,7 @@ const NewsLetter = () => {
                 <input
                   type="email"
                   required
-                  placeholder="Enter your email address"
+                  placeholder="Enter email"
                   className="w-full pr-28 pl-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                 />
                 <button

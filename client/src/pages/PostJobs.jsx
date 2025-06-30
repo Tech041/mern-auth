@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import JobForm from "../components/JobForm";
 
 const PostJobs = () => {
   return (
-    <div>PostJobs</div>
-  )
-}
+    <section className="w-full min-h-screen pt-20">
+      <JobForm />
+    </section>
+  );
+};
 
-export default PostJobs
+export default PostJobs;

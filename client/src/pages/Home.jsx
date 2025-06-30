@@ -8,7 +8,7 @@ import NewsLetter from "../components/NewsLetter";
 
 const Home = () => {
   return (
-    <main className="pt-20 w-full h-full ">
+    <main className="pt-20  w-full min-h-screen ">
       <Hero />
       <LatestJobPost />
       <WhyChooseUs />

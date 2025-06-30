@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="h-full w-full  pb-5 pt-20 ">
+    <section className=" w-full  pb-5 pt-20 ">
       <div className="container">
         {/* wrapper div */}
         <div className=" w-full h-full flex flex-col lg:flex-row justify-between items-center gap-4">
@@ -17,8 +17,8 @@ const Hero = () => {
               viewport={{ once: false }}
             >
               <h1 className="font-semibold text-2xl md:text-3xl lg:text-4xl uppercase text-center lg:text-start ">
-                Your <span className="text-blue-500 italic">trusted</span> partner in
-                healthcare staffing{" "}
+                Your <span className="text-blue-500 italic">trusted</span>{" "}
+                partner in healthcare staffing{" "}
                 <span className="text-blue-500 italic">solutions</span>.
               </h1>
             </motion.div>
@@ -66,6 +66,10 @@ const Hero = () => {
               className1={
                 "h-full w-full px-5 border  bg-blue-50 rounded-lg p-5"
               }
+              paragraph={
+                "Choose us as your trusted and dedicated partner in uniting healthcare providers with world-class professionals—where precision meets care."
+              }
+              path={"/create-profile"}
               className2={"relative w-10 text-blue-600 "}
               title={"healthcare professionals"}
               text={"    Create Profile"}
@@ -83,6 +87,10 @@ const Hero = () => {
                 "h-full w-full px-5 border  bg-green-50 rounded-lg p-5"
               }
               className2={"relative w-10 text-green-600 "}
+              paragraph={
+                " Choose us as your trusted partner and experience a transformative approach to connecting healthcare facilities with top-tier professionals."
+              }
+              path={"/post-jobs"}
               title={"healthcare organizations"}
               text={"Post Jobs"}
             />

@@ -198,7 +198,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="pb-4">
+        <div className="py-4">
           <p className=" capitalize text-xl font-medium mb-5 text-gray-300 ">
             Contact Us
           </p>
@@ -206,44 +206,28 @@ const Footer = () => {
             <div className="flex  items-center ">
               <div className="flex items-center justify-center gap-3 ">
                 <div className="">
-                  <a
-                    href="https://www.facebook.com/share/1BsrNLBAEd/"
-                    target="_blank"
-                    className=""
-                  >
+                  <a href="" target="_blank" className="">
                     <span className="">
                       <FaFacebookF size={20} color="white" />
                     </span>
                   </a>
                 </div>
                 <div className="">
-                  <a
-                    href="https://www.instagram.com/kaceefresh"
-                    target="_blank"
-                    className=""
-                  >
+                  <a href="" target="_blank" className="">
                     <span className="">
                       <FaInstagram size={20} color="white" />
                     </span>
                   </a>
                 </div>
                 <div className="">
-                  <a
-                    href="https://www.tiktok.com/@kaceefresh1"
-                    target="_blank"
-                    className=""
-                  >
+                  <a href="" target="_blank" className="">
                     <span className="">
                       <FaTiktok size={20} color="white" />
                     </span>
                   </a>
                 </div>
                 <div className="">
-                  <a
-                    href="https://x.com/kaceefresh"
-                    target="_blank"
-                    className=""
-                  >
+                  <a href="" target="_blank" className="">
                     <span className="">
                       <RiTwitterXLine size={20} color="white" />
                     </span>

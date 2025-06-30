@@ -4,11 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 * {
   font-family: "Outfit", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
 }
 
 .active {

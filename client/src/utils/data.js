@@ -1,0 +1,125 @@
+export const jobListing = [
+  {
+    id: 1,
+    profession: "Pharmacy",
+    title: "Intern pharmacist",
+    location: "Enugu",
+    companyDescription:
+      "This is a community pharmacy that deals on different kinds of drug products including groceries both in retaail and wholesale. We are motivated to providing adequate supply of good and quality prodcuts to our customers while adhering to regulatory standards of practise",
+    qualifications: [
+      "B.Pharm, Knowledge of community practice, Good communication skill, Patient oriented,IT oriented",
+    ],
+    jobDescription: [
+      "patient counselling",
+      "stock taking",
+      "drug precription",
+      "patient assessment",
+      "drug dispensing",
+      "recording patient data into the database",
+    ],
+    salary: "300,000",
+    postedBy: "Mr John",
+    Contact: "mrjohn@gmail.com",
+    createdAt: "7hrs ago",
+  },
+  {
+    id: 2,
+    profession: "Physiotherapy",
+    title: "Physiotherapist",
+    location: "Awka",
+    companyDescription:
+      "This is a community hospital that deals on different kinds of drug products including groceries both in retaail and wholesale. We are motivated to providing adequate supply of good and quality prodcuts to our customers while adhering to regulatory standards of practise",
+    qualifications: [
+      "B.PTP, Knowledge of community practice, Good communication skill, Patient oriented,IT oriented",
+    ],
+    jobDescription: [
+      "patient counselling",
+      "stock taking",
+      "drug precription",
+      "patient assessment",
+      "drug dispensing",
+      "recording patient data into the database",
+    ],
+    salary: "250,000",
+    postedBy: "Mr John",
+    Contact: "mrjohn@gmail.com",
+    createdAt: "9hrs ago",
+  },
+  {
+    id: 3,
+    profession: "Radiography",
+    title: "Intern Radiographer",
+    location: "Enugu",
+    companyDescription:
+      "This is a private enterprise that deals on different kinds of drug products including groceries both in retaail and wholesale. We are motivated to providing adequate supply of good and quality prodcuts to our customers while adhering to regulatory standards of practise",
+    qualifications: [
+      "B.Rad, Knowledge of community practice, Good communication skill, Patient oriented,IT oriented",
+    ],
+    jobDescription: [
+      "patient counselling",
+      "stock taking",
+      "drug precription",
+      "patient assessment",
+      "drug dispensing",
+      "recording patient data into the database",
+    ],
+    salary: "200,000",
+    postedBy: "Mr John",
+    Contact: "mrjohn@gmail.com",
+    createdAt: "7hrs ago",
+  },
+  {
+    id: 4,
+    profession: "Medicince",
+    title: "General practitioner",
+    location: "Lagos",
+    companyDescription:
+      "This is a public institution that deals on different kinds of drug products including groceries both in retaail and wholesale. We are motivated to providing adequate supply of good and quality prodcuts to our customers while adhering to regulatory standards of practise",
+    qualifications: [
+      "MBBS, Knowledge of community practice, Good communication skill, Patient oriented,IT oriented",
+    ],
+    jobDescription: [
+      "patient counselling",
+      "stock taking",
+      "drug precription",
+      "patient assessment",
+      "drug dispensing",
+      "recording patient data into the database",
+    ],
+    salary: "360,000",
+    postedBy: "Mr John",
+    Contact: "mrjohn@gmail.com",
+    createdAt: "7hrs ago",
+  },
+  {
+    id: 5,
+    profession: "Nurse",
+    title: "Mid Wife",
+    location: "Abuja",
+    companyDescription:
+      "This is a private clinic that deals on different kinds of drug products including groceries both in retaail and wholesale. We are motivated to providing adequate supply of good and quality prodcuts to our customers while adhering to regulatory standards of practise",
+    qualifications: [
+      "B.Sc, Knowledge of community practice, Good communication skill, Patient oriented,IT oriented",
+    ],
+    jobDescription: [
+      "patient counselling",
+      "stock taking",
+      "drug precription",
+      "patient assessment",
+      "drug dispensing",
+      "recording patient data into the database",
+    ],
+    salary: "150,000",
+    postedBy: "Mr John",
+    Contact: "mrjohn@gmail.com",
+    createdAt: "7hrs ago",
+  },
+];
+export const user = {
+  name: "Dr. Amina Okafor",
+  profession: "General Practitioner",
+  university: "University of Ibadan",
+  nationality: "Nigerian",
+  phone: "+234 802 123 4567",
+  email: "amina.okafor@example.com",
+};

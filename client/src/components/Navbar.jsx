@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { assets } from "../assets/assets";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -43,44 +43,53 @@ const Navbar = () => {
     }
   };
   return (
-    <header className=" fixed w-full h-[80px]  flex items-center  bg-gray-50 z-40">
+    <header className=" fixed w-full h-[100px]  flex items-center  bg-gray-50 z-40">
       <div className="container">
         <div className="flex justify-between items-center">
           {/* logo */}
           <div className="">
-            <span
-              onClick={() => navigate("/")}
+            <img
+              src="/medhunt_logo.webp"
+              width={100}
+              height={70}
+              onClick={() => {
+                navigate("/"), scrollTo(0, 0);
+              }}
               className="cursor-pointer text-blue-600 font-semibold"
-            >
-              MedHunt
-            </span>
+            />
           </div>{" "}
           <div className="hidden md:flex justify-center items-center ">
             <nav className="">
               <ul className="flex justify-between items-center gap-3">
-                <NavLink to={"/"} className={listStyle}>
+                <NavLink
+                  to={"/"}
+                  onClick={() => scrollTo(0, 0)}
+                  className={listStyle}
+                >
                   <span className="flex items-center justify-center">
                     <FiHome size={20} />
                   </span>
                   <span className="text-sm">Home</span>
                 </NavLink>
-                <NavLink to={"/jobs"} className={listStyle}>
+                <NavLink
+                  onClick={() => scrollTo(0, 0)}
+                  to={"/jobs"}
+                  className={listStyle}
+                >
                   <span className="flex items-center justify-center">
                     <BsFillBoxSeamFill size={20} />
                   </span>
                   <span className="text-sm">Jobs</span>
                 </NavLink>
-                <NavLink to={"/post-jobs"} className={listStyle}>
+                <NavLink
+                  onClick={() => scrollTo(0, 0)}
+                  to={"/post-jobs"}
+                  className={listStyle}
+                >
                   <span className="flex items-center justify-center">
                     <AiFillMedicineBox size={20} />
                   </span>
                   <span className="text-sm">Post a job</span>
-                </NavLink>
-                <NavLink to={"/notifications"} className={listStyle}>
-                  <span className="flex items-center justify-center">
-                    <IoMdNotificationsOutline size={25} />
-                  </span>
-                  <span className="text-sm">Notifications</span>
                 </NavLink>
               </ul>
             </nav>
@@ -88,10 +97,13 @@ const Navbar = () => {
           <div className="">
             {userData ? (
               <div className="h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
-                <span className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md">
-                  {/* {userData.name} */}
+                <Link
+                  onClick={() => scrollTo(0, 0)}
+                  to={"/my-profile"}
+                  className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md z-20"
+                >
                   My profile
-                </span>{" "}
+                </Link>{" "}
                 <div className="absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-10">
                   <ul className="list-none m-0 p-2 bg-gray-100 text-sm">
                     {!userData.isAccountVerified && (

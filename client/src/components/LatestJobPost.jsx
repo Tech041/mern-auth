@@ -1,6 +1,8 @@
 import React from "react";
 import JobCard from "./JobCard";
 import { motion } from "framer-motion";
+import { jobListing } from "../utils/data";
+import { Link } from "react-router-dom";
 
 const LatestJobPost = () => {
   return (
@@ -11,43 +13,32 @@ const LatestJobPost = () => {
         </h1>
         <h2 className="">
           Looking for opportunity?{" "}
-          <span className="text-blue-500 text-sm italic cursor-pointer">
+          <Link
+            to={"/jobs"}
+            onClick={() => scrollTo(0, 0)}
+            className="text-blue-500 text-sm italic cursor-pointer"
+          >
             Browse all jobs
-          </span>
+          </Link>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-          <motion.div
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: false }}
-          >
-            <JobCard />
-          </motion.div>
-          <motion.div
-            initial={{ x: 100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: false }}
-          >
-            <JobCard />
-          </motion.div>
-          <motion.div
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: false }}
-          >
-            <JobCard />
-          </motion.div>
-          <motion.div
-            initial={{ x: 100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: false }}
-          >
-            <JobCard />
-          </motion.div>
+          {jobListing?.slice(0, 4).map((job) => (
+            <motion.div
+              initial={{ y: -100, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: false }}
+              key={job.id}
+            >
+              <JobCard
+                title={job.title}
+                location={job.location}
+                salary={job.salary}
+                qualifications={job.qualifications}
+                posted={job.createdAt}
+              />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,8 +1,16 @@
 import React from "react";
 import { IoStarSharp } from "react-icons/io5";
 import { assets } from "../assets/assets";
+import { Link } from "react-router-dom";
 
-const CategoryCard = ({ className1, className2,title, text }) => {
+const CategoryCard = ({
+  className1,
+  className2,
+  title,
+  paragraph,
+  path,
+  text,
+}) => {
   return (
     <div className={className1}>
       {/* wrapper */}
@@ -17,21 +25,17 @@ const CategoryCard = ({ className1, className2,title, text }) => {
             </span>
           </div>
         </div>
-        <h2 className="uppercase  text-lg font-semibold">
-          {title}
-        </h2>
+        <h2 className="uppercase  text-lg font-semibold">{title}</h2>
       </div>
       <div className="">
-        <p className="flex justify-center items-center">
-          Choose us as your trusted partner and experience a transformative
-          approach to connecting healthcare facilities with top-tier
-          professionals.
-        </p>
+        <p className="flex justify-center items-center">{paragraph}</p>
         <div className="pt-3">
-          <button className=" flex items-center gap-2 bg-white text-gray-600 border px-4 py-1  text-sm">
-            {text}
-            <img src={assets.arrow_icon} alt="" className="arrow_icon" />
-          </button>
+          <Link onClick={() => scrollTo(0, 0)} to={path}>
+            <button className=" flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-600 border px-4 py-1  text-sm">
+              {text}
+              <img src={assets.arrow_icon} alt="" className="arrow_icon" />
+            </button>
+          </Link>
         </div>
       </div>
     </div>
