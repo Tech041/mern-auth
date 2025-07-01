@@ -36,6 +36,23 @@ const userSchema = new Schema(
       type: Number,
       default: 0,
     },
+    profile: {
+      type: Schema.Types.ObjectId,
+      ref: "Profile",
+      default: null,
+    },
+    appliedJobs: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+    postedJobs: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -51,7 +51,7 @@ const ResetPassword = () => {
       data.success ? toast.success(data.message) : toast.error(data.message);
       data.success && setIsEmailSent(true);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message);
     }
   };
   // function for submitting otp
@@ -71,7 +71,7 @@ const ResetPassword = () => {
       data.success ? toast.success(data.message) : toast.error(data.message);
       data.success && navigate("/login");
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message);
     }
   };
   return (

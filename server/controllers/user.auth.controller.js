@@ -11,12 +11,16 @@ import {
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
-    return res.json({ success: false, message: "Missing Details" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Incomplete credentials" });
   }
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.json({ success: false, message: "User already exists" });
+      return res
+        .status(409)
+        .json({ success: false, message: "User already exists" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
@@ -36,9 +40,12 @@ export const register = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return res.json({ success: true, message: "Registration successful" });
+    return res
+      .status(201)
+      .json({ success: true, message: "Registration successful" });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    console.log(error.message);
+    return res.status(500).json({ message: "Something went wrong!" });
   }
 };
 
@@ -46,7 +53,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.json({
+    return res.status(400).json({
       success: false,
       message: "Email and password are required",
     });
@@ -54,11 +61,11 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.json({ success: false, message: "User does not exist" });
+      return res.status(404).json({ success: false, message: "User does not exist" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.json({ success: false, message: "Invalid password" });
+      return res.status(403).json({ success: false, message: "Invalid password" });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
@@ -73,12 +80,10 @@ export const login = async (req, res) => {
       sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-    return res.json({ success: true, message: "Login successful" });
+    return res.status(200).json({ success: true, message: "Login successful" });
   } catch (error) {
-    return res.json({
-      success: false,
-      message: error.message,
-    });
+    console.log(error.message);
+    return res.status(500).json({ message: "Something went wrong!" });
   }
 };
 // Logout User
@@ -94,7 +99,8 @@ export const logout = async (req, res) => {
       message: "Logged Out",
     });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    console.log(error.message);
+    return res.status(500).json({ message: "Something went wrong!" });
   }
 };
 
@@ -104,7 +110,7 @@ export const sendVerifyOtp = async (req, res) => {
     const { userId } = req.body;
     const user = await User.findById(userId);
     if (user.isAccountVerified) {
-      return res.json({ success: false, message: "Account already verified" });
+      return res.status(200).json({ success: false, message: "Account already verified" });
     }
     const otp = String(Math.floor(100000 + Math.random() * 900000));
 
@@ -126,12 +132,13 @@ export const sendVerifyOtp = async (req, res) => {
       ),
     };
     await transpoter.sendMail(mailOptions);
-    return res.json({
+    return res.status(200).json({
       success: true,
       message: "Verification OTP sent on email",
     });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    console.log(error.message);
+    return res.status(500).json({ message: "Something went wrong!" });
   }
 };
 
@@ -141,20 +148,20 @@ export const verifyEmail = async (req, res) => {
   const { userId, otp } = req.body;
 
   if (!userId || !otp) {
-    return res.json({ success: false, message: "Missing details" });
+    return res.status(400).json({ success: false, message: "Missing details" });
   }
 
   try {
     const user = await User.findById(userId);
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: "User not found" });
     }
     if (user.verifyOtp === "" || user.verifyOtp !== otp) {
-      return res.json({ success: false, message: "Invalid OTP" });
+      return res.status(400).json({ success: false, message: "Invalid OTP" });
     }
 
     if (user.verifyOtpExpiredAt < Date.now()) {
-      return res.json({ success: false, message: "OTP Expired" });
+      return res.status(400).json({ success: false, message: "OTP Expired" });
     }
 
     user.isAccountVerified = true;
@@ -170,13 +177,14 @@ export const verifyEmail = async (req, res) => {
     };
     await transpoter.sendMail(mailOptions);
 
-    return res.json({ success: true, message: "Email verified successfully" });
+    return res.status(200).json({ success: true, message: "Email verified successfully" });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    console.log(error.message);
+    return res.status(500).json({ message: "Something went wrong!" });
   }
 };
 
-// Check if user is authenticated
+// Check if user is authenticated not need now. commented it out in frontend
 
 export const isAuthenticated = async (req, res) => {
   try {
@@ -191,12 +199,14 @@ export const isAuthenticated = async (req, res) => {
 export const sendResetOtp = async (req, res) => {
   const { email } = req.body;
   if (!email) {
-    return res.json({ success: false, message: "Email is required" });
+    return res.status(400).json({ success: false, message: "Email is required" });
   }
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
 
     // Generate OTP
@@ -221,12 +231,13 @@ export const sendResetOtp = async (req, res) => {
       ),
     };
     await transpoter.sendMail(mailOptions);
-    return res.json({
+    return res.status(200).json({
       success: true,
       message: "Password Reset OTP sent on email",
     });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    console.log(error.message);
+    return res.status(500).json({ message: "Something went wrong!" });
   }
 };
 
@@ -234,7 +245,7 @@ export const sendResetOtp = async (req, res) => {
 export const resetPassword = async (req, res) => {
   const { email, otp, newPassword } = req.body;
   if (!email || !otp || !newPassword) {
-    return res.json({
+    return res.status(403).json({
       success: false,
       message: "Email,OTP and new Password are required",
     });
@@ -243,13 +254,17 @@ export const resetPassword = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
     if (user.resetOtp === "" || user.resetOtp !== otp) {
-      return res.json({ success: false, message: "Invalid OTP" });
+      return res.status(400).json({ success: false, message: "Invalid OTP" });
     }
     if (user.resetOtpExpiredAt < Date.now()) {
-      return res.json({ success: false, message: "OTP has expired" });
+      return res
+        .status(400)
+        .json({ success: false, message: "OTP has expired" });
     }
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
@@ -257,8 +272,11 @@ export const resetPassword = async (req, res) => {
     user.resetOtp = "";
     user.resetOtpExpiredAt = 0;
     await user.save();
-    return res.json({ success: true, message: "Password reset successful" });
+    return res
+      .status(201)
+      .json({ success: true, message: "Password reset successful" });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    console.log(error.message);
+    return res.status(500).json({ message: "Something went wrong!" });
   }
 };

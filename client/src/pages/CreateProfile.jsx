@@ -4,6 +4,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import apiRequest from "../utils/apiRequest";
 
 const CreateProfileschema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -18,12 +19,24 @@ const CreateProfileschema = z.object({
 
   cv: z
     .instanceof(FileList)
-    .refine((files) => files.length > 0, "CV is required"),
+    .refine((files) => files.length > 0, "CV is required")
+    .refine(
+      (files) =>
+        Array.from(files).every(
+          (file) =>
+            file.size < 1024 * 1024 &&
+            (file.type === "application/pdf" ||
+              file.type === "application/msword" ||
+              file.type ===
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+        ),
+      "File must be a PDF or Word document and less than 1MB"
+    ),
 });
 
 const CreateProfile = () => {
   const navigate = useNavigate();
-  const { userData, } = useContext(AppContext);
+  const { userData, isLoading } = useContext(AppContext);
   const {
     register,
     reset,
@@ -43,21 +56,18 @@ const CreateProfile = () => {
     formData.append("email", data.email);
     formData.append("cv", data.cv[0]);
 
-    // try {
-    //   const response = await axios.post(
-    //     "https://your-backend.com/api/profile",
-    //     formData,
-    //     {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     }
-    //   );
-    //   console.log("Submission successful:", response.data);
-    //   reset();
-    // } catch (err) {
-    //   console.error("Submission failed:", err);
-    // }
+    try {
+      const { data } = await apiRequest.post(
+        "api/user/create-profile",
+        formData
+      );
+      if (data.success) {
+        console.log("Submission successful:", data);
+        reset();
+      }
+    } catch (err) {
+      console.error("Submission failed:", err);
+    }
     for (let pair of formData.entries()) {
       console.log(`${pair[0]}:`, pair[1]);
     }
@@ -66,8 +76,10 @@ const CreateProfile = () => {
   };
 
   useEffect(() => {
-    !userData && navigate("/login");
-  }, [userData]);
+    if (!userData && !isLoading) {
+      navigate("/login");
+    }
+  }, [userData, isLoading]);
   return (
     <section className="w-full min-h-screen pt-20 mb-5">
       <div className="container">
@@ -116,6 +128,9 @@ const CreateProfile = () => {
                 {...register("cv")}
                 className="w-full border border-gray-300 rounded px-2 py-1"
               />
+              <p className="text-center  text-sm text-gray-500">
+                PDF or Doc format less than 1MB
+              </p>
               {errors.cv && (
                 <p className="text-red-500 text-sm mt-1">{errors.cv.message}</p>
               )}

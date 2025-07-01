@@ -12,8 +12,7 @@ import apiRequest from "../utils/apiRequest";
 const listStyle =
   "cursor-pointer px-2 flex flex-col justify-center item-center text-primary ";
 const Navbar = () => {
-  const { userData, backendUrl, setUserData, setIsLoggedIn } =
-    useContext(AppContext);
+  const { userData, backendUrl, setUserData } = useContext(AppContext);
   const navigate = useNavigate();
   const sendVerificationOtp = async () => {
     try {
@@ -33,11 +32,11 @@ const Navbar = () => {
   const logout = async () => {
     try {
       const { data } = await apiRequest.post(backendUrl + "/api/auth/logout");
-      data.success && setIsLoggedIn(false);
-      data.success && setUserData(false);
+      data.success && setUserData(null);
+      toast.error(data.message);
       navigate("/");
     } catch (error) {
-      toast.error(error.message);
+      console.log(error.message);
     }
   };
   return (

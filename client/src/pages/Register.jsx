@@ -18,7 +18,7 @@ const registerSchema = z.object({
 });
 
 const Register = () => {
-  const { backendUrl, setIsLoggedIn, getUserData } = useContext(AppContext);
+  const { backendUrl, getUserData } = useContext(AppContext);
   const navigate = useNavigate();
 
   const {
@@ -30,8 +30,6 @@ const Register = () => {
     resolver: zodResolver(registerSchema),
   });
   const onSubmitHandler = async (registerData) => {
-    console.log("Hello world", registerData);
-    reset();
     try {
       axios.defaults.withCredentials = true;
 
@@ -41,15 +39,16 @@ const Register = () => {
       );
 
       if (data.success) {
-        setIsLoggedIn(true);
         getUserData();
         navigate("/");
+        reset();
         toast.success(data.message);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message);
+      console.log(error)
     }
   };
 

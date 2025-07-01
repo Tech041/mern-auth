@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 
-const userAuth = async (req, res, next) => {
+const userProfileAuth = async (req, res, next) => {
   const { token } = req.cookies;
+
   if (!token) {
     return res.status(403).json({ message: "Please login" });
   }
@@ -9,12 +10,12 @@ const userAuth = async (req, res, next) => {
   try {
     const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
     if (tokenDecode.id) {
-      req.body.userId = tokenDecode.id;
+      req.user = { id: tokenDecode.id };
     }
     next();
   } catch (error) {
-    return res.status(500).json({ message: "Something went wrong" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
-export default userAuth;
+export default userProfileAuth;

@@ -17,7 +17,7 @@ const loginSchema = z.object({
 });
 
 const Login = () => {
-  const { backendUrl, setIsLoggedIn, getUserData } = useContext(AppContext);
+  const { backendUrl, getUserData } = useContext(AppContext);
   const navigate = useNavigate();
 
   const {
@@ -29,8 +29,6 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
   const onSubmitHandler = async (loginData) => {
-    console.log(loginData);
-    reset();
     try {
       axios.defaults.withCredentials = true;
 
@@ -39,7 +37,7 @@ const Login = () => {
         loginData
       );
       if (data.success) {
-        setIsLoggedIn(true);
+        reset();
         getUserData();
         navigate("/");
         toast.success(data.message);
@@ -47,7 +45,8 @@ const Login = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message);
+      console.log(error);
     }
   };
 

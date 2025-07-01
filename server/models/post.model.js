@@ -32,6 +32,12 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    candidate: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   { timestamps: true }
 );

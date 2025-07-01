@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { Schema } from "mongoose";
+const { Schema } = mongoose;
+
 const userProfileSchema = new Schema(
   {
     name: {
@@ -20,11 +21,21 @@ const userProfileSchema = new Schema(
     },
     phone: {
       type: String,
-      unique: true,
       required: true,
     },
     email: {
       type: String,
+      required: true,
+      unique: true,
+    },
+    cv: {
+      type: new Schema(
+        {
+          url: { type: String, required: true },
+          public_id: { type: String, required: true },
+        },
+        { _id: false } // prevents Mongoose from auto-generating a subdocument ID
+      ),
       required: true,
     },
     user: {
@@ -35,5 +46,6 @@ const userProfileSchema = new Schema(
   },
   { timestamps: true }
 );
+
 const Profile = mongoose.model("Profile", userProfileSchema);
 export default Profile;
