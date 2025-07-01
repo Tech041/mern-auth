@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppContext } from "../context/AppContext";
-import { useNavigate } from "react-router-dom";
 import apiRequest from "../utils/apiRequest";
+import { toast } from "react-toastify";
 
 const CreateProfileschema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -35,8 +35,7 @@ const CreateProfileschema = z.object({
 });
 
 const CreateProfile = () => {
-  const navigate = useNavigate();
-  const { userData, isLoading } = useContext(AppContext);
+  const { userData, isLoading, getUserData, navigate } = useContext(AppContext);
   const {
     register,
     reset,
@@ -62,21 +61,24 @@ const CreateProfile = () => {
         formData
       );
       if (data.success) {
-        console.log("Submission successful:", data);
+        toast.success(data.message);
+        getUserData();
+        navigate("/");
         reset();
       }
-    } catch (err) {
-      console.error("Submission failed:", err);
+    } catch (error) {
+      toast.error(error.response?.data?.message);
+      console.log(error);
     }
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}:`, pair[1]);
-    }
+    // for (let pair of formData.entries()) {
+    //   console.log(`${pair[0]}:`, pair[1]);
+    // }
 
     reset();
   };
 
   useEffect(() => {
-    if (!userData && !isLoading) {
+    if (userData === null && !isLoading) {
       navigate("/login");
     }
   }, [userData, isLoading]);

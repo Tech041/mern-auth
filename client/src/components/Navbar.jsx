@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { assets } from "../assets/assets";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink,  } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import { FiHome } from "react-icons/fi";
@@ -12,23 +12,10 @@ import apiRequest from "../utils/apiRequest";
 const listStyle =
   "cursor-pointer px-2 flex flex-col justify-center item-center text-primary ";
 const Navbar = () => {
-  const { userData, backendUrl, setUserData } = useContext(AppContext);
-  const navigate = useNavigate();
-  const sendVerificationOtp = async () => {
-    try {
-      const { data } = await apiRequest.post(
-        backendUrl + "/api/auth/send-verify-otp"
-      );
-      if (data.success) {
-        navigate("/email-verification");
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  const { userData, backendUrl, setUserData, sendVerificationOtp, navigate } =
+    useContext(AppContext);
+  const profileId = userData?.profileId;
+
   const logout = async () => {
     try {
       const { data } = await apiRequest.post(backendUrl + "/api/auth/logout");
@@ -94,13 +81,23 @@ const Navbar = () => {
           <div className="">
             {userData ? (
               <div className="h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
-                <Link
-                  onClick={() => scrollTo(0, 0)}
-                  to={"/my-profile"}
-                  className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md z-20"
-                >
-                  My profile
-                </Link>{" "}
+                {userData.profileId === null ? (
+                  <Link
+                    onClick={() => scrollTo(0, 0)}
+                    to={`/create-profile`}
+                    className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md z-20"
+                  >
+                    Create profile
+                  </Link>
+                ) : (
+                  <Link
+                    onClick={() => scrollTo(0, 0)}
+                    to={`/my-profile/${profileId}`}
+                    className="text-base  px-3 py-1 border-2 border-blue-500 rounded-md z-20"
+                  >
+                    My profile
+                  </Link>
+                )}
                 <div className="absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-10">
                   <ul className="list-none m-0 p-2 bg-gray-100 text-sm">
                     {!userData.isAccountVerified && (

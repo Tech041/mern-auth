@@ -7,6 +7,7 @@ import authRouter from "./routes/user.auth.route.js";
 import userRouter from "./routes/user.profile.route.js";
 import helmet from "helmet";
 import connectCloudinary from "./config/cloudinary.js";
+import postRouter from "./routes/post.route.js";
 const app = express();
 
 // DB AND CLOUDINARY CONNECTIONS
@@ -38,6 +39,7 @@ app.use(helmet());
 // API ENDPOINTS
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api", postRouter);
 app.get("/", (req, res) => {
   res.send("API IS WORKING");
 });

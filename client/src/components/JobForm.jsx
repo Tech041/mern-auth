@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import apiRequest from "../utils/apiRequest";
+import { toast } from "react-toastify";
 const JobFormSchema = z.object({
   profession: z.string().min(1, { message: "Profession is required" }),
   title: z.string().min(1, { message: "Title is required" }),
@@ -9,44 +13,51 @@ const JobFormSchema = z.object({
   requirements: z.string().min(1, { message: "Requirements is required" }),
   jobDescription: z.string().min(1, { message: "Job description is required" }),
   postedBy: z.string().min(1, { message: "Posted by is required" }),
-  email: z.string().min(1, { message: "Email is required" }),
+  email: z
+    .string()
+    .email("Invalid email")
+    .min(1, { message: "Email is required" }),
 });
 const JobForm = () => {
-  const [formData, setFormData] = useState({
-    profession: "",
-    title: "",
-    salary: "",
-    requirements: "",
-    jobDescription: "",
-    postedBy: "",
-    email: "",
-  });
+  const { userData } = useContext(AppContext);
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(JobFormSchema),
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const handleSubmitJobForm = async (job) => {
+    try {
+      const { data } = await apiRequest.post("/api/post-job", job);
 
-  const handleSubmitJobForm = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    reset();
-    // Add submission logic here
+      if (data.success) {
+        toast.success(data.message);
+        console.log("posted job", data);
+        reset();
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message);
+      console.log(error);
+    }
   };
 
   return (
     <div className="w-full h-full flex justify-center items-center pt-10 mb-5">
       <div className="container">
         <div className="mt-5">
-          <h2 className="text-2xl font-bold mb-6 text-center">Post a Job</h2>
+          <h2
+            className={`${
+              !userData?.isAccountVerified ? "text-red-500" : ""
+            } text-2xl font-bold mb-6 text-center`}
+          >
+            {!userData?.isAccountVerified
+              ? "Please verify your email before posting any jobs"
+              : "Post a Job"}
+          </h2>
           <form
             onSubmit={handleSubmit(handleSubmitJobForm)}
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -57,8 +68,6 @@ const JobForm = () => {
                 type="text"
                 name="profession"
                 placeholder="Profession"
-                value={formData.profession}
-                onChange={handleChange}
                 className="border rounded px-3 py-2 w-full"
               />
               {errors.profession && (
@@ -71,8 +80,6 @@ const JobForm = () => {
                 type="text"
                 name="title"
                 placeholder="Job Title"
-                value={formData.title}
-                onChange={handleChange}
                 className="border rounded px-3 py-2 w-full"
               />
               {errors.title && (
@@ -85,8 +92,6 @@ const JobForm = () => {
                 type="text"
                 name="salary"
                 placeholder="Salary"
-                value={formData.salary}
-                onChange={handleChange}
                 className="border rounded px-3 py-2 w-full"
               />
               {errors.salary && (
@@ -99,8 +104,6 @@ const JobForm = () => {
                 type="text"
                 name="requirements"
                 placeholder="Requirements"
-                value={formData.requirements}
-                onChange={handleChange}
                 className="border rounded px-3 py-2 w-full"
               />
               {errors.requirements && (
@@ -112,8 +115,6 @@ const JobForm = () => {
                 {...register("jobDescription")}
                 name="jobDescription"
                 placeholder="Job Description"
-                value={formData.jobDescription}
-                onChange={handleChange}
                 className="border rounded px-3 py-2 w-full"
               />
               {errors.jobDescription && (
@@ -126,8 +127,6 @@ const JobForm = () => {
                 type="text"
                 name="postedBy"
                 placeholder="Posted by"
-                value={formData.postedBy}
-                onChange={handleChange}
                 className="border rounded px-3 py-2 w-full"
               />
               {errors.postedBy && (
@@ -140,8 +139,6 @@ const JobForm = () => {
                 type="email"
                 name="email"
                 placeholder="Contact Email"
-                value={formData.email}
-                onChange={handleChange}
                 className="border rounded px-3 py-2 w-full"
               />
               {errors.email && (

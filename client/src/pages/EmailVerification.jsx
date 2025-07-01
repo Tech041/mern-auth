@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const EmailVerification = () => {
   axios.defaults.withCredentials = true;
 
-  const { backendUrl, isLoggedIn, userData, getUserData } =
+  const { backendUrl,  userData, getUserData } =
     useContext(AppContext);
   const inputRefs = React.useRef([]);
   const navigate = useNavigate();
@@ -51,12 +51,13 @@ const EmailVerification = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message);
+      console.log(error);
     }
   };
   useEffect(() => {
-    isLoggedIn && userData && userData.isAccountVerified && navigate("/");
-  }, [isLoggedIn, userData]);
+     userData && userData.isAccountVerified && navigate("/");
+  }, [ userData]);
   return (
     <section className="flex items-center justify-center min-h-screen bg-white pt-20">
       <div className="container">

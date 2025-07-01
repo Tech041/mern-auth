@@ -5,10 +5,13 @@ import { AppContext } from "../context/AppContext";
 
 const PostJobs = () => {
   const navigate = useNavigate();
-  const { userData } = useContext(AppContext);
+  const { userData, isLoading } = useContext(AppContext);
   useEffect(() => {
-    !userData && navigate("/login");
-  }, [userData]);
+    if (!isLoading && userData === null) {
+      navigate("/login");
+    }
+  }, [userData, isLoading]);
+
   return (
     <section className="w-full min-h-screen pt-20">
       <JobForm />

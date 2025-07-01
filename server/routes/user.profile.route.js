@@ -3,6 +3,7 @@ import userAuth from "../middlewares/user.auth.js";
 import {
   createProfile,
   getUserData,
+  getUserProfile,
 } from "../controllers/user.profile.controller.js";
 import upload from "../middlewares/multer.js";
 import userProfileAuth from "../middlewares/user.profile.auth.js";
@@ -15,4 +16,6 @@ userRouter.post(
   userProfileAuth,
   createProfile
 );
+userRouter.get("/profile/:profileId", userAuth, getUserProfile);
+
 export default userRouter;

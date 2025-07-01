@@ -15,6 +15,9 @@ export const getUserData = async (req, res) => {
       userData: {
         name: user.name,
         isAccountVerified: user.isAccountVerified,
+        profileId: user.profile,
+        appliedJobs: user.appliedJobs,
+        postedJobs: user.postedJobs,
       },
     });
   } catch (error) {
@@ -90,6 +93,29 @@ export const createProfile = async (req, res) => {
       message: "Profile created successfully",
       profile,
     });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const { profileId } = req.params;
+    if (!profileId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Profile Id is required" });
+    }
+    const profile = await Profile.findById(profileId);
+    if (!profile) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Profile not found" });
+    }
+    return res
+      .status(200)
+      .json({ success: true, message: "Profile found", profile });
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ message: "Something went wrong" });

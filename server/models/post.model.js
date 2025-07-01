@@ -16,10 +16,9 @@ const postSchema = new Schema(
     },
     requirements: {
       type: String,
-      unique: true,
       required: true,
     },
-    description: {
+    jobDescription: {
       type: String,
       required: true,
     },
@@ -38,8 +37,12 @@ const postSchema = new Schema(
         ref: "User",
       },
     ],
+    isApproved: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );
-const Post = mongoose.model("Profile", postSchema);
+const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
 export default Post;

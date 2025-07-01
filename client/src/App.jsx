@@ -31,7 +31,7 @@ const App = () => {
         <Route path="/why-us" element={<WhyUs />} />
         <Route path="/our-blog" element={<OurBlog />} />
         <Route path="/create-profile" element={<CreateProfile />} />
-        <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/my-profile/:profileId" element={<MyProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/email-verification" element={<EmailVerification />} />
