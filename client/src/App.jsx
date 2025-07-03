@@ -17,6 +17,7 @@ const MyProfile = React.lazy(() => import("./pages/MyProfile"));
 const SingleJob = React.lazy(() => import("./pages/SingleJob"));
 const WhyUs = React.lazy(() => import("./pages/WhyUs"));
 const OurBlog = React.lazy(() => import("./pages/OurBlog"));
+const About = React.lazy(() => import("./pages/About"));
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/my-profile/:profileId" element={<MyProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
         <Route path="/email-verification" element={<EmailVerification />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>

@@ -1,84 +1,100 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
-import { Link, NavLink,  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
-import { FiHome } from "react-icons/fi";
-import { BsFillBoxSeamFill } from "react-icons/bs";
-import { AiFillMedicineBox } from "react-icons/ai";
-import { IoMdNotificationsOutline } from "react-icons/io";
 import apiRequest from "../utils/apiRequest";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoMdClose } from "react-icons/io";
+import NavbarLinks from "./NavbarLinks";
+import Logo from "./Logo";
 
-const listStyle =
-  "cursor-pointer px-2 flex flex-col justify-center item-center text-primary ";
 const Navbar = () => {
-  const { userData, backendUrl, setUserData, sendVerificationOtp, navigate } =
+  const [open, setOpen] = useState(false);
+  const handleToggle = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const { userData, setUserData, sendVerificationOtp, navigate } =
     useContext(AppContext);
   const profileId = userData?.profileId;
 
   const logout = async () => {
     try {
-      const { data } = await apiRequest.post(backendUrl + "/api/auth/logout");
+      const { data } = await apiRequest.post("/api/auth/logout");
       data.success && setUserData(null);
-      toast.error(data.message);
+      toast.success(data.message);
       navigate("/");
     } catch (error) {
       console.log(error.message);
     }
   };
   return (
-    <header className=" fixed w-full h-[100px]  flex items-center  bg-gray-50 z-40">
+    <header className=" fixed w-full h-[100px]  flex items-center  bg-gray-50 z-20 ">
       <div className="container">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center ">
           {/* logo */}
-          <div className="">
-            <img
-              src="/medhunt_logo.webp"
-              width={100}
-              height={70}
-              onClick={() => {
-                navigate("/"), scrollTo(0, 0);
-              }}
-              className="cursor-pointer text-blue-600 font-semibold"
-            />
-          </div>{" "}
+          <Logo />
           <div className="hidden md:flex justify-center items-center ">
-            <nav className="">
-              <ul className="flex justify-between items-center gap-3">
-                <NavLink
-                  to={"/"}
-                  onClick={() => scrollTo(0, 0)}
-                  className={listStyle}
+            <NavbarLinks />
+          </div>
+          {/* Mobile menu */}
+          <div
+            className={` block md:hidden w-[70%] h-screen absolute z-30 bg-gray-200 top-0 transition-all duration-500 ease-in-out ${
+              open ? "right-0" : "right-[-100%]"
+            }`}
+          >
+            <nav className=" mt-10 pt-10 flex justify-center">
+              <ul className="flex flex-col justify-center items-center gap-6 font-bold">
+                <li
+                  onClick={() => {
+                    setOpen((prev) => !prev), scrollTo(0, 0);
+                  }}
+                  className=""
                 >
-                  <span className="flex items-center justify-center">
-                    <FiHome size={20} />
-                  </span>
-                  <span className="text-sm">Home</span>
-                </NavLink>
-                <NavLink
-                  onClick={() => scrollTo(0, 0)}
-                  to={"/jobs"}
-                  className={listStyle}
+                  <Link to={"/"}>Home</Link>
+                </li>
+                <li
+                  onClick={() => {
+                    setOpen((prev) => !prev), scrollTo(0, 0);
+                  }}
+                  className=""
                 >
-                  <span className="flex items-center justify-center">
-                    <BsFillBoxSeamFill size={20} />
-                  </span>
-                  <span className="text-sm">Jobs</span>
-                </NavLink>
-                <NavLink
-                  onClick={() => scrollTo(0, 0)}
-                  to={"/post-jobs"}
-                  className={listStyle}
+                  <Link to={"/"}>About</Link>
+                </li>
+                <li
+                  onClick={() => {
+                    setOpen((prev) => !prev), scrollTo(0, 0);
+                  }}
+                  className=""
                 >
-                  <span className="flex items-center justify-center">
-                    <AiFillMedicineBox size={20} />
-                  </span>
-                  <span className="text-sm">Post a job</span>
-                </NavLink>
+                  <Link to={"/jobs"}>Jobs</Link>
+                </li>
+                <li
+                  onClick={() => {
+                    setOpen((prev) => !prev), scrollTo(0, 0);
+                  }}
+                  className=""
+                >
+                  <Link to={"/post-jobs"}>Post Jobs</Link>
+                </li>
+                <li
+                  onClick={() => {
+                    setOpen((prev) => !prev), scrollTo(0, 0);
+                  }}
+                  className=""
+                >
+                  <Link
+                    onClick={() => scrollTo(0, 0)}
+                    to={`/my-profile/${profileId}`}
+                  >
+                    My Profile
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>
-          <div className="">
+          <div className="flex items-center gap-3">
             {userData ? (
               <div className="h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
                 {userData.profileId === null ? (
@@ -120,7 +136,9 @@ const Navbar = () => {
             ) : (
               <div className="flex items-center ">
                 <button
-                  onClick={() => navigate("/register")}
+                  onClick={() => {
+                    navigate("/register"), scrollTo(0, 0);
+                  }}
                   className="flex items-center gap-2 border border-blue-500  px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
                 >
                   Login{" "}
@@ -132,6 +150,16 @@ const Navbar = () => {
                 </button>
               </div>
             )}
+            <div
+              onClick={handleToggle}
+              className="block md:hidden z-40 cursor-pointer "
+            >
+              {open ? (
+                <IoMdClose color="blue" size={30} />
+              ) : (
+                <GiHamburgerMenu size={30} />
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -1,10 +1,13 @@
 import React from "react";
 import JobCard from "./JobCard";
 import { motion } from "framer-motion";
-import { jobListing } from "../utils/data";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import { formatDistanceToNow } from "date-fns";
 
 const LatestJobPost = () => {
+  const { jobs } = useContext(AppContext);
   return (
     <section className="w-full h-full">
       <div className="container">
@@ -22,23 +25,29 @@ const LatestJobPost = () => {
           </Link>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-          {jobListing?.slice(0, 4).map((job) => (
-            <motion.div
-              initial={{ y: -100, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              viewport={{ once: false }}
-              key={job.id}
-            >
-              <JobCard
-                title={job.title}
-                location={job.location}
-                salary={job.salary}
-                qualifications={job.qualifications}
-                posted={job.createdAt}
-              />
-            </motion.div>
-          ))}
+          {jobs
+            ?.reverse()
+            .slice(0, 4)
+            .map((job) => (
+              <motion.div
+                initial={{ y: -100, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: false }}
+                key={job._id}
+              >
+                <JobCard
+                  id={job._id}
+                  title={job.title}
+                  location={job.location}
+                  salary={job.salary}
+                  qualifications={job.qualifications}
+                  posted={formatDistanceToNow(new Date(job.createdAt), {
+                    addSuffix: true,
+                  })}
+                />
+              </motion.div>
+            ))}
         </div>
       </div>
     </section>

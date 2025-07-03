@@ -1,24 +1,32 @@
 import { FaInstagram } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebookF } from "react-icons/fa6";
-import { FaPhone } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa6";
 import { RiTwitterXLine } from "react-icons/ri";
+import { AppContext } from "../context/AppContext";
+import { useContext } from "react";
 const Footer = () => {
+  const { userData } = useContext(AppContext);
+  const profileId = userData?.profileId;
+  const navigate = useNavigate();
+
   return (
     <footer className="bg-black  text-white h-full" id="footer">
       <div className="container">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center  gap-14  text-sm">
           <div className="">
             <div className="">
-              <div className="p-2">
-                <a href="#home" className="">
-                  <img
-                    src="/medhunt_logo.webp"
-                    alt=""
-                    className="w-[70px] h-[60px] rounded-md "
-                  />
-                </a>
+              <div
+                onClick={() => {
+                  navigate("/"), scrollTo(0, 0);
+                }}
+                className="p-2"
+              >
+                <img
+                  src="/medhunt_logo.webp"
+                  alt=""
+                  className="w-[70px] h-[60px] rounded-md "
+                />
               </div>
             </div>
           </div>
@@ -37,9 +45,6 @@ const Footer = () => {
                   About
                 </Link>
               </li>
-              
-              
-             
             </ul>
           </div>
           <div className="">
@@ -50,7 +55,11 @@ const Footer = () => {
               <div className="flex  items-center ">
                 <ul className="flex flex-col gap-1 text-gray-400">
                   <li className="cursor-pointer py-1">
-                    <Link  onClick={() => scrollTo(0, 0)} to={"/jobs"} className="">
+                    <Link
+                      onClick={() => scrollTo(0, 0)}
+                      to={"/jobs"}
+                      className=""
+                    >
                       Browse Jobs
                     </Link>
                   </li>
@@ -66,14 +75,12 @@ const Footer = () => {
                   <li className="cursor-pointer py-1">
                     <Link
                       onClick={() => scrollTo(0, 0)}
-                      to={"/my-profile"}
+                      to={`/my-profile/${profileId}`}
                       className=""
                     >
                       My Profile
                     </Link>
                   </li>
-                  
-                  
                 </ul>
               </div>
             </div>
@@ -98,7 +105,7 @@ const Footer = () => {
                   <li className="cursor-pointer">
                     <Link
                       onClick={() => scrollTo(0, 0)}
-                      to={"/my-profile"}
+                      to={`/my-profile/${profileId}`}
                       className=""
                     >
                       Employer's Profile

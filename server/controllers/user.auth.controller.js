@@ -61,11 +61,15 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ success: false, message: "User does not exist" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User does not exist" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(403).json({ success: false, message: "Invalid password" });
+      return res
+        .status(403)
+        .json({ success: false, message: "Invalid password" });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
@@ -110,7 +114,9 @@ export const sendVerifyOtp = async (req, res) => {
     const { userId } = req.body;
     const user = await User.findById(userId);
     if (user.isAccountVerified) {
-      return res.status(200).json({ success: false, message: "Account already verified" });
+      return res
+        .status(200)
+        .json({ success: false, message: "Account already verified" });
     }
     const otp = String(Math.floor(100000 + Math.random() * 900000));
 
@@ -154,7 +160,9 @@ export const verifyEmail = async (req, res) => {
   try {
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
     if (user.verifyOtp === "" || user.verifyOtp !== otp) {
       return res.status(400).json({ success: false, message: "Invalid OTP" });
@@ -177,7 +185,9 @@ export const verifyEmail = async (req, res) => {
     };
     await transpoter.sendMail(mailOptions);
 
-    return res.status(200).json({ success: true, message: "Email verified successfully" });
+    return res
+      .status(200)
+      .json({ success: true, message: "Email verified successfully" });
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ message: "Something went wrong!" });
@@ -199,7 +209,9 @@ export const isAuthenticated = async (req, res) => {
 export const sendResetOtp = async (req, res) => {
   const { email } = req.body;
   if (!email) {
-    return res.status(400).json({ success: false, message: "Email is required" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Email is required" });
   }
   try {
     const user = await User.findOne({ email });

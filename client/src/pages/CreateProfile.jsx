@@ -36,6 +36,7 @@ const CreateProfileschema = z.object({
 
 const CreateProfile = () => {
   const { userData, isLoading, getUserData, navigate } = useContext(AppContext);
+  console.log("user dtat is ", !isLoading && userData);
   const {
     register,
     reset,
@@ -82,6 +83,7 @@ const CreateProfile = () => {
       navigate("/login");
     }
   }, [userData, isLoading]);
+
   return (
     <section className="w-full min-h-screen pt-20 mb-5">
       <div className="container">

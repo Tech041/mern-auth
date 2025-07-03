@@ -10,7 +10,29 @@ export const AppContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [myProfile, setMyProfile] = useState({});
+  const [jobs, setJobs] = useState([]);
+  const [jobIsLoading, setJobIsLoading] = useState(true);
+  const [jobItem, setJobItem] = useState(null);
+  const [isApplied, setIsApplied] = useState(false);
+
   const navigate = useNavigate();
+  // apply for jobs
+  const applyForJob = async (id) => {
+    try {
+      const { data } = await apiRequest.post(`/api/apply/${id}`);
+      if (data.success) {
+        toast.success(data.message);
+        getUserData();
+        setLoading(false);
+      } else {
+        toast.error(data.message);
+        setIsApplied(true);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message);
+      console.log(error);
+    }
+  };
 
   // verify email
   const sendVerificationOtp = async () => {
@@ -44,6 +66,17 @@ export const AppContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  // fetch all jobs
+  const fetchAllJobs = async () => {
+    const { data } = await apiRequest.get("/api/fetch-jobs");
+    if (data.success) {
+      setJobs(data.allJobs);
+      setJobIsLoading(false);
+      setJobItem(data.allJobs[0]); // Default to first job
+    }
+  };
+
   //   getting user data
   const getUserData = async () => {
     setIsLoading(true);
@@ -51,6 +84,7 @@ export const AppContextProvider = ({ children }) => {
     try {
       const { data } = await apiRequest.get(backendUrl + "/api/user/data");
       data.success ? setUserData(data.userData) : toast.error(data.message);
+      console.log("user data from context", data.userData);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -60,7 +94,17 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     getUserData();
   }, []);
+  useEffect(() => {
+    fetchAllJobs();
+  }, []);
   const value = {
+    isApplied,
+    applyForJob,
+    jobIsLoading,
+    jobItem,
+    setJobItem,
+    jobs,
+    fetchAllJobs,
     navigate,
     sendVerificationOtp,
     loading,

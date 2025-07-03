@@ -4,10 +4,10 @@ import { IoLocationSharp } from "react-icons/io5";
 import { FaRegClock } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-const JobCard = ({ title, location, salary, posted, qualifications }) => {
+const JobCard = ({ title, location, salary, posted, qualifications, id }) => {
   return (
     <Link
-      to={"/job-details/87878"}
+      to={`/job-details/${id}`}
       onClick={() => scrollTo(0, 0)}
       className="flex items-center gap-3 border bg-gray-50 rounded-lg px-4 py-3 shadow-lg"
     >

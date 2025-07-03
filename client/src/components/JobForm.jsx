@@ -10,6 +10,7 @@ const JobFormSchema = z.object({
   profession: z.string().min(1, { message: "Profession is required" }),
   title: z.string().min(1, { message: "Title is required" }),
   salary: z.string().min(1, { message: "Salary is required" }),
+  location: z.string().min(1, { message: "Location is required" }),
   requirements: z.string().min(1, { message: "Requirements is required" }),
   jobDescription: z.string().min(1, { message: "Job description is required" }),
   postedBy: z.string().min(1, { message: "Posted by is required" }),
@@ -100,8 +101,19 @@ const JobForm = () => {
             </div>
             <div className="w-full flex flex-col">
               <input
-                {...register("requirements")}
+                {...register("location")}
                 type="text"
+                name="location"
+                placeholder="Location"
+                className="border rounded px-3 py-2 w-full"
+              />
+              {errors.location && (
+                <p className="text-red-600">{errors.location.message}</p>
+              )}
+            </div>
+            <div className="w-full flex flex-col md:col-span-2">
+              <textarea
+                {...register("requirements")}
                 name="requirements"
                 placeholder="Requirements"
                 className="border rounded px-3 py-2 w-full"

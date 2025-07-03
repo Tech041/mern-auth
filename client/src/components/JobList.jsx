@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { FaAngleUp } from "react-icons/fa6";
-import apiRequest from "../utils/apiRequest";
+import { formatDistanceToNow } from "date-fns";
+
 import Spinner from "./Spinner";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
 const spanStyle = "font-semibold text-lg py-2";
 
 const JobList = () => {
+  const { jobIsLoading, jobItem, jobs, fetchAllJobs, setJobItem, applyForJob } =
+    useContext(AppContext);
   const [openAccordionId, setOpenAccordionId] = useState(null);
-  const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [jobItem, setJobItem] = useState(null);
 
-  const fetchAllJobs = async () => {
-    const { data } = await apiRequest.get("/api/fetch-jobs");
-    if (data.success) {
-      setJobs(data.allJobs);
-      setLoading(false);
-      setJobItem(data.allJobs[0]); // Default to first job
-    }
-  };
-
+  console.log("Jobitem id id ", jobItem && jobItem._id);
   useEffect(() => {
     fetchAllJobs();
   }, []);
@@ -37,13 +31,13 @@ const JobList = () => {
     <section className="w-full h-full">
       <div className="container">
         {/* Desktop view */}
-        {loading ? (
+        {jobIsLoading ? (
           <Spinner />
         ) : (
           <div className="hidden md:block">
             <div className="flex justify-between gap-4">
               {/* Job list */}
-              <div className="flex-1 w-full md:border-r-2">
+              <div className="flex-1 max-h-screen overflow-y-auto  md:border-r-2">
                 {jobs.map((item) => (
                   <div
                     onClick={() => handleJobId(item)}
@@ -66,7 +60,7 @@ const JobList = () => {
               </div>
 
               {/* Job details */}
-              <div className="flex-1">
+              <div className="flex-1  max-h-screen overflow-y-auto ">
                 {jobItem && (
                   <div className="mt-5">
                     <div className="pt-5 text-xl md:text-3xl font-bold pb-2">
@@ -88,20 +82,25 @@ const JobList = () => {
                       <span className={spanStyle}>Job Description:</span>{" "}
                       {jobItem.jobDescription}
                     </div>
-                    <div>
+                    {/* <div>
                       <span className={spanStyle}>Posted by:</span>{" "}
                       {jobItem.postedBy}
-                    </div>
+                    </div> */}
                     <div>
                       <span className={spanStyle}>Posted:</span>{" "}
-                      {jobItem.createdAt}
+                      {formatDistanceToNow(new Date(jobItem.createdAt), {
+                        addSuffix: true,
+                      })}
                     </div>
                     <div>
                       <span className={spanStyle}>Contact:</span>{" "}
-                      {jobItem.contact}
+                      {jobItem.email}
                     </div>
                     <div className="mt-4 pt-4 flex justify-center mb-4">
-                      <button className="bg-blue-600 hover:bg-blue-400 text-white px-4 py-2 rounded-md">
+                      <button
+                        onClick={() => applyForJob(jobItem._id)}
+                        className="bg-blue-600 hover:bg-blue-400 text-white px-4 py-2 rounded-md"
+                      >
                         Apply Now
                       </button>
                     </div>
@@ -113,7 +112,7 @@ const JobList = () => {
         )}
 
         {/* Mobile view */}
-        {loading ? (
+        {jobIsLoading ? (
           <Spinner />
         ) : (
           <div className="block md:hidden">
@@ -158,19 +157,24 @@ const JobList = () => {
                       <span className={spanStyle}>Job Description:</span>{" "}
                       {item.jobDescription}
                     </div>
-                    <div>
+                    {/* <div>
                       <span className={spanStyle}>Posted by:</span>{" "}
                       {item.postedBy}
-                    </div>
+                    </div> */}
                     <div>
                       <span className={spanStyle}>Posted:</span>{" "}
-                      {item.createdAt}
+                      {formatDistanceToNow(new Date(item.createdAt), {
+                        addSuffix: true,
+                      })}
                     </div>
                     <div>
-                      <span className={spanStyle}>Contact:</span> {item.contact}
+                      <span className={spanStyle}>Contact:</span> {item.email}
                     </div>
                     <div className="mt-2 text-center">
-                      <button className="bg-blue-600 hover:bg-blue-400 text-white px-3 py-2 rounded">
+                      <button
+                        onClick={() => applyForJob(item._id)}
+                        className="bg-blue-600 hover:bg-blue-400 text-white px-3 py-2 rounded"
+                      >
                         Apply Now
                       </button>
                     </div>

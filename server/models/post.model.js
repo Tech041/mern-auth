@@ -18,6 +18,10 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    location: {
+      type: String,
+      required: true,
+    },
     jobDescription: {
       type: String,
       required: true,
@@ -35,6 +39,12 @@ const postSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "User",
+      },
+    ],
+    applicants: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Profile",
       },
     ],
     isApproved: {
