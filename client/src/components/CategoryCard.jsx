@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { IoStarSharp } from "react-icons/io5";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ const CategoryCard = ({
   path,
   text,
 }) => {
-  const { userData } = useContext(AppContext);
+  
 
   return (
     <div className={className1}>

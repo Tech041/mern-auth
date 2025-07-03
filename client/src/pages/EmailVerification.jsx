@@ -3,12 +3,12 @@ import axios from "axios";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import apiRequest from "../utils/apiRequest";
 
 const EmailVerification = () => {
   axios.defaults.withCredentials = true;
 
-  const { backendUrl,  userData, getUserData } =
-    useContext(AppContext);
+  const { backendUrl, userData, getUserData } = useContext(AppContext);
   const inputRefs = React.useRef([]);
   const navigate = useNavigate();
 
@@ -39,10 +39,9 @@ const EmailVerification = () => {
       e.preventDefault();
       const otpArray = inputRefs.current.map((e) => e.value);
       const otp = otpArray.join("");
-      const { data } = await axios.post(
-        backendUrl + "/api/auth/verify-account",
-        { otp }
-      );
+      const { data } = await apiRequest.post("/api/auth/verify-account", {
+        otp,
+      });
       if (data.success) {
         toast.success(data.message);
         getUserData();
@@ -56,8 +55,8 @@ const EmailVerification = () => {
     }
   };
   useEffect(() => {
-     userData && userData.isAccountVerified && navigate("/");
-  }, [ userData]);
+    userData && userData.isAccountVerified && navigate("/");
+  }, [userData]);
   return (
     <section className="flex items-center justify-center min-h-screen bg-white pt-20">
       <div className="container">

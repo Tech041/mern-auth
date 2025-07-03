@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import React from "react";
 import Footer from "./components/Footer";
 
+
+
 // Dynamic imports.
 const Home = React.lazy(() => import("./pages/Home"));
 const CreateProfile = React.lazy(() => import("./pages/CreateProfile"));

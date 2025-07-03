@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import apiRequest from "../utils/apiRequest";
 
 const ResetPassword = () => {
   axios.defaults.withCredentials = true;
@@ -51,7 +52,7 @@ const ResetPassword = () => {
       data.success ? toast.success(data.message) : toast.error(data.message);
       data.success && setIsEmailSent(true);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error(error.response?.data?.message);
     }
   };
@@ -65,14 +66,15 @@ const ResetPassword = () => {
   const onSubmitNewPassword = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        backendUrl + "/api/auth/reset-password",
-        { email, otp, newPassword }
-      );
+      const { data } = await apiRequest.post("/api/auth/reset-password", {
+        email,
+        otp,
+        newPassword,
+      });
       data.success ? toast.success(data.message) : toast.error(data.message);
       data.success && navigate("/login");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error(error.response?.data?.message);
     }
   };

@@ -37,7 +37,6 @@ const JobForm = () => {
 
       if (data.success) {
         toast.success(data.message);
-        console.log("posted job", data);
         reset();
       }
     } catch (error) {

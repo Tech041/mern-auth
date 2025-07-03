@@ -38,7 +38,7 @@ export const AppContextProvider = ({ children }) => {
   const sendVerificationOtp = async () => {
     try {
       const { data } = await apiRequest.post(
-        backendUrl + "/api/auth/send-verify-otp"
+        "/api/auth/send-verify-otp"
       );
       if (data.success) {
         navigate("/email-verification");
@@ -82,9 +82,8 @@ export const AppContextProvider = ({ children }) => {
     setIsLoading(true);
 
     try {
-      const { data } = await apiRequest.get(backendUrl + "/api/user/data");
+      const { data } = await apiRequest.get( "/api/user/data");
       data.success ? setUserData(data.userData) : toast.error(data.message);
-      console.log("user data from context", data.userData);
       setIsLoading(false);
     } catch (error) {
       console.log(error);

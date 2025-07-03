@@ -36,7 +36,7 @@ const CreateProfileschema = z.object({
 
 const CreateProfile = () => {
   const { userData, isLoading, getUserData, navigate } = useContext(AppContext);
-  console.log("user dtat is ", !isLoading && userData);
+  
   const {
     register,
     reset,
