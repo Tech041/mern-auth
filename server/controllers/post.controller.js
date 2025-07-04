@@ -12,6 +12,12 @@ export const postJob = async (req, res) => {
         .status(403)
         .json({ success: false, message: "Verify your email" });
     }
+    if (user.profile === null) {
+      return res.status(403).json({
+        success: false,
+        message: "No active profile, create one and try again",
+      });
+    }
 
     const {
       profession,
@@ -74,9 +80,15 @@ export const applyForJob = async (req, res) => {
     if (applicant.profile === null) {
       return res.status(403).json({
         success: false,
-        message: "You do not have profile, create one and try again",
+        message: "No active profile, create one and try again",
       });
     }
+    if (!applicant.isAccountVerified) {
+      return res
+        .status(403)
+        .json({ success: false, message: "Verify your email" });
+    }
+
     const job = await Post.findById(jobId);
     if (job.candidate.includes(applicantId)) {
       return res.status(200).json({
