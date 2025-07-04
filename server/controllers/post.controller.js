@@ -6,6 +6,12 @@ export const postJob = async (req, res) => {
   try {
     const { id } = req.user;
     const userId = id;
+    const user = await User.findById(userId);
+    if (!user.isAccountVerified) {
+      return res
+        .status(403)
+        .json({ success: false, message: "Verify your email" });
+    }
 
     const {
       profession,
