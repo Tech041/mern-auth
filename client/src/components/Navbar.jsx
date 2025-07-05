@@ -79,7 +79,7 @@ const Navbar = () => {
                   <Link to={"/post-jobs"}>Post Jobs</Link>
                 </li>
 
-                {userData?.profileId === null ? (
+                {/* {userData?.profileId === null ? (
                   <li
                     onClick={() => {
                       setOpen((prev) => !prev), scrollTo(0, 0);
@@ -107,7 +107,7 @@ const Navbar = () => {
                       My Profile
                     </Link>
                   </li>
-                )}
+                )} */}
               </ul>
             </nav>
           </div>
