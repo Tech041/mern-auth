@@ -16,7 +16,7 @@ connectCloudinary();
 
 // Frontend Url
 const allowedOrigins = [
-  "https://mernauth-frontend.vercel.app",
+  "https://medhunt-portal.vercel.app",
   "http://localhost:3000",
 ];
 
