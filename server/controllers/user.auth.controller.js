@@ -181,7 +181,9 @@ export const verifyEmail = async (req, res) => {
       from: process.env.SENDER_EMAIL,
       to: user.email,
       subject: "MedHunt Healthcare Job Portal.",
-      text: `Dear ${user.name} your  account with ${user.email} has  been verified. When creating a profile, use this same email address. We promise to serve you better.`,
+      text: `Dear ${user.name.split(" ")[0]} your  account with ${
+        user.email
+      } has  been verified. When creating a profile, use this same email address. We promise to serve you better.`,
     };
     await transpoter.sendMail(mailOptions);
 

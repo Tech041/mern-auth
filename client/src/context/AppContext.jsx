@@ -14,6 +14,8 @@ export const AppContextProvider = ({ children }) => {
   const [jobIsLoading, setJobIsLoading] = useState(true);
   const [jobItem, setJobItem] = useState(null);
   const [isApplied, setIsApplied] = useState(false);
+  const [search, setSearch] = useState("");
+  const [listed, setListed] = useState([]);
 
   const navigate = useNavigate();
   // apply for jobs
@@ -37,9 +39,7 @@ export const AppContextProvider = ({ children }) => {
   // verify email
   const sendVerificationOtp = async () => {
     try {
-      const { data } = await apiRequest.post(
-        "/api/auth/send-verify-otp"
-      );
+      const { data } = await apiRequest.post("/api/auth/send-verify-otp");
       if (data.success) {
         navigate("/email-verification");
         toast.success(data.message);
@@ -82,7 +82,7 @@ export const AppContextProvider = ({ children }) => {
     setIsLoading(true);
 
     try {
-      const { data } = await apiRequest.get( "/api/user/data");
+      const { data } = await apiRequest.get("/api/user/data");
       data.success ? setUserData(data.userData) : toast.error(data.message);
       setIsLoading(false);
     } catch (error) {
@@ -97,6 +97,10 @@ export const AppContextProvider = ({ children }) => {
     fetchAllJobs();
   }, []);
   const value = {
+    listed,
+    setListed,
+    search,
+    setSearch,
     isApplied,
     applyForJob,
     jobIsLoading,

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import JobHeader from "../components/JobHeader";
 import JobList from "../components/JobList";
 import { motion } from "framer-motion";
+import { AppContext } from "../context/AppContext";
 
 const Jobs = () => {
+  const { setSearch } = useContext(AppContext);
   return (
     <main className="pt-20 w-full min-h-screen">
       <motion.div
@@ -12,7 +14,7 @@ const Jobs = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: false }}
       >
-        <JobHeader />
+        <JobHeader setSearch={setSearch} />
       </motion.div>
 
       <motion.div

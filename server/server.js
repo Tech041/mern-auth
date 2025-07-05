@@ -34,6 +34,8 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+// Helmet to secure my HTTP headers
 app.use(helmet());
 
 // API ENDPOINTS

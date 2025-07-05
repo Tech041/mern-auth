@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
-const JobHeader = () => {
+const JobHeader = ({ setSearch }) => {
   return (
     <section className="w-full h-full pt-10 flex  justify-center my-3">
       <div className="container">
@@ -11,8 +12,9 @@ const JobHeader = () => {
         <div className="flex flex-col items-center justify-center w-full  mt-5">
           <div className="w-[80%]">
             <input
+              onChange={(e) => setSearch(e.target.value)}
               type="text"
-              placeholder="Search by title/profession "
+              placeholder="Search by Profession "
               className="placeholder:text-base placeholder:capitalize px-6 py-3 border border-gray-500 w-full rounded-md"
             />
           </div>

@@ -1,7 +1,6 @@
 🩺 MedHunt – Job Portal for Healthcare Professionals
 MedHunt is a full-stack job application platform built specifically for healthcare professionals. It empowers authenticated users to create profiles, apply for jobs, post job listings, and manage applications—all in one seamless experience. Designed with both recruiters and job seekers in mind, MedHunt bridges the gap between talent and opportunity in the medical field
 
-Live demo :https://mernauth-frontend.vercel.app/
 
 🚀 Features
 👤 User & Profile Management

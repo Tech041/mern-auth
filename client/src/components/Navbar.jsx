@@ -60,7 +60,7 @@ const Navbar = () => {
                   }}
                   className=""
                 >
-                  <Link to={"/"}>About</Link>
+                  <Link to={"/about"}>About</Link>
                 </li>
                 <li
                   onClick={() => {
@@ -78,26 +78,43 @@ const Navbar = () => {
                 >
                   <Link to={"/post-jobs"}>Post Jobs</Link>
                 </li>
-                <li
-                  onClick={() => {
-                    setOpen((prev) => !prev), scrollTo(0, 0);
-                  }}
-                  className=""
-                >
-                  <Link
-                    onClick={() => scrollTo(0, 0)}
-                    to={`/my-profile/${profileId}`}
+
+                {userData?.profileId === null ? (
+                  <li
+                    onClick={() => {
+                      setOpen((prev) => !prev), scrollTo(0, 0);
+                    }}
+                    className=""
                   >
-                    My Profile
-                  </Link>
-                </li>
+                    <Link
+                      onClick={() => scrollTo(0, 0)}
+                      to={`/create-profile`}
+                    >
+                      Create Profile
+                    </Link>
+                  </li>
+                ) : (
+                  <li
+                    onClick={() => {
+                      setOpen((prev) => !prev), scrollTo(0, 0);
+                    }}
+                    className=""
+                  >
+                    <Link
+                      onClick={() => scrollTo(0, 0)}
+                      to={`/my-profile/${profileId}`}
+                    >
+                      My Profile
+                    </Link>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>
           <div className="flex items-center gap-3">
             {userData ? (
               <div className="h-5 flex justify-center items-center cursor-pointer  text-blue-700 rounded-md  relative group">
-                {userData.profileId === null ? (
+                {userData?.profileId === null ? (
                   <Link
                     onClick={() => scrollTo(0, 0)}
                     to={`/create-profile`}
@@ -116,7 +133,7 @@ const Navbar = () => {
                 )}
                 <div className="absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-10">
                   <ul className="list-none m-0 p-2 bg-gray-100 text-sm">
-                    {!userData.isAccountVerified && (
+                    {!userData?.isAccountVerified && (
                       <li
                         onClick={sendVerificationOtp}
                         className="py-1 px-2 hover:bg-gray-200 text-green-500 cursor-pointer"
