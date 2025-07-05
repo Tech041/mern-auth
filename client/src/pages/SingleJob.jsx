@@ -39,7 +39,7 @@ const SingleJob = () => {
                 </div>
                 <div>
                   <span className={spanStyle}>Qualifications:</span>{" "}
-                  {jobItem.qualifications}
+                  {jobItem.requirements}
                 </div>
                 <div>
                   <span className={spanStyle}>Job Description:</span>{" "}

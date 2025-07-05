@@ -33,7 +33,7 @@ const JobCard = ({ title, location, salary, posted, qualifications, id }) => {
             <FaRegClock size={10} /> <span className="text-xs">{posted}</span>
           </div>
         </div>
-        <p className="text-xs text-gray-600 pt-2">{qualifications}</p>
+        {/* <p className="text-xs text-gray-600 pt-2">{qualifications}</p> */}
       </div>
     </Link>
   );

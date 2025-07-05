@@ -8,6 +8,7 @@ import { formatDistanceToNow } from "date-fns";
 
 const LatestJobPost = () => {
   const { jobs } = useContext(AppContext);
+  // console.log("Job from latest", jobs && jobs);
   return (
     <section className="w-full h-full">
       <div className="container">
@@ -41,7 +42,7 @@ const LatestJobPost = () => {
                   title={job.title}
                   location={job.location}
                   salary={job.salary}
-                  qualifications={job.qualifications}
+                  qualifications={job.requirements}
                   posted={formatDistanceToNow(new Date(job.createdAt), {
                     addSuffix: true,
                   })}
