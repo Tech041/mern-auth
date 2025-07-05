@@ -4,7 +4,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { FaRegClock } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-const JobCard = ({ title, location, salary, posted, qualifications, id }) => {
+const JobCard = ({ title, location, salary, posted,  id }) => {
   return (
     <Link
       to={`/job-details/${id}`}
