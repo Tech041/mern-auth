@@ -8,9 +8,7 @@ const PostJobs = () => {
   const navigate = useNavigate();
   const { userData, isLoading } = useContext(AppContext);
   useEffect(() => {
-    if (!isLoading && userData === null) {
-      navigate("/login");
-    }
+    !isLoading && userData === null && navigate("/login");
   }, [userData, isLoading]);
 
   return (

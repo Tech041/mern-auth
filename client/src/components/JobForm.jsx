@@ -55,7 +55,7 @@ const JobForm = () => {
             } text-2xl font-bold mb-6 text-center`}
           >
             {!userData?.isAccountVerified
-              ? "Please verify your email before posting any jobs"
+              ? "Login and verify your email before posting any jobs"
               : "Post a Job"}
           </h2>
           <form
