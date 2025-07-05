@@ -15,7 +15,7 @@ const SingleJob = () => {
     if (jobs.length > 0) {
       const foundJob = jobs.find((job) => job._id === id);
       setJobItem(foundJob);
-      console.log("fOUND njOB ", foundJob);
+      
     }
   }, [jobs, id]);
 
