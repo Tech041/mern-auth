@@ -7,7 +7,7 @@ import { formatDistanceToNow } from "date-fns";
 const spanStyle = "font-semibold text-lg py-2";
 
 const SingleJob = () => {
-  const { jobs } = useContext(AppContext);
+  const { jobs, applyForJob } = useContext(AppContext);
   const { id } = useParams();
   const [jobItem, setJobItem] = useState(null);
 
@@ -15,7 +15,6 @@ const SingleJob = () => {
     if (jobs.length > 0) {
       const foundJob = jobs.find((job) => job._id === id);
       setJobItem(foundJob);
-      
     }
   }, [jobs, id]);
 
@@ -61,7 +60,10 @@ const SingleJob = () => {
                   <span className={spanStyle}>Contact:</span> {jobItem.email}
                 </div>
                 <div className="mt-4 pt-4 flex justify-center mb-4">
-                  <button className="bg-blue-600 hover:bg-blue-400 text-white px-4 py-2 rounded-md">
+                  <button
+                    onClick={() => applyForJob(jobItem._id)}
+                    className="bg-blue-600 hover:bg-blue-400 text-white px-4 py-2 rounded-md"
+                  >
                     Apply Now
                   </button>
                 </div>
